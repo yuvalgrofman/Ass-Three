@@ -7,6 +7,7 @@ class SocketIO : DefaultIO {
     public:
         virtual string read() const override;
         virtual void write(string str) const override;
+        virtual void close() const override;
 };
 
 

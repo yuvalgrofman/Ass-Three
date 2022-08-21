@@ -10,3 +10,5 @@ string StandardIO::read() const {
 void StandardIO::write(string str) const {
     cout << str << endl;
 }
+
+void close(){}
