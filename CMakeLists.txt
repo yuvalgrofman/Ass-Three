@@ -31,4 +31,4 @@ add_executable(AssThree.out
         classifier/flower/flowerSorter.h
         classifier/flower/flowerSorter.cpp
         server/server.h server/server.cpp
-        main.cpp server/server_handler.cpp server/server_handler.h)
+        main.cpp server/server_handler.cpp server/server_handler.h server/command/command.h server/IO/defaultIO.h server/command/recvData.cpp server/command/recvData.h server/command/knnSettings.cpp server/command/knnSettings.h server/command/command.cpp)
