@@ -1,7 +1,9 @@
 #include <algorithm>
 #include "knnSettings.h"
 
-KnnSettings::KnnSettings(int userId) : userId(userId) {}
+KnnSettings::KnnSettings(DefaultIO* dio, int userId) : Command(dio, userId) {
+    description.assign("algorithm settings");
+}
 
 
 

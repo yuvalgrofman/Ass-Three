@@ -6,12 +6,8 @@
 
 class recvData : Command {
 
-    private:
-        int userId;
-
-
     public:
-        recvData(int userId);
+        recvData(DefaultIO* dio, int userId);
         void execute() override;
 
 };

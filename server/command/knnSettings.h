@@ -10,11 +10,8 @@
 
 class KnnSettings : Command {
 
-    private:
-        int userId;
-
     public:
-        KnnSettings(int userId);
+        KnnSettings(DefaultIO* dio, int userId);
         void execute() override;
 };
 

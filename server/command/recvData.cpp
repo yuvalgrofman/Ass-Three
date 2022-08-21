@@ -1,6 +1,8 @@
 #include "recvData.h"
 
-recvData::recvData(int userId) : userId(userId) {}
+recvData::recvData(DefaultIO* dio, int userId) : Command(dio, userId) {
+    description.assign("upload an unclassified csv data file");
+}
 
 void recvData::execute() {
     string trainFileContents = dio->read();

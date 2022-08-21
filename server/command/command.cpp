@@ -1,8 +1,9 @@
 #include "command.h"
 
+Command::Command(DefaultIO *dio, int userId) : dio(dio), userId(userId) {}
+
 void Command::writeCSVFile(string filepath, string fileContent) {
-    ofstream ostream;
-    ostream.open(filepath);
+    ofstream ostream(filepath);
 
     if (!ostream.is_open()) {
         //TODO: print error
@@ -13,8 +14,7 @@ void Command::writeCSVFile(string filepath, string fileContent) {
 }
 
 int Command::getK() {
-    ifstream istream;
-    istream.open("../server/data/user_" + to_string(userId) + "_config.csv");
+    ifstream istream("../server/data/user_" + to_string(userId) + "_config.csv");
 
     if (!istream.is_open()) {
         //TODO: print error
@@ -27,8 +27,7 @@ int Command::getK() {
 }
 
 Distance* Command::getDistance() {
-    ifstream istream;
-    istream.open("../server/data/user_" + to_string(userId) + "_config.csv");
+    ifstream istream("../server/data/user_" + to_string(userId) + "_config.csv");
 
     if (!istream.is_open()) {
         //TODO: print error

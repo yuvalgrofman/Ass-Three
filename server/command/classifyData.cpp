@@ -2,21 +2,30 @@
 #include "classifyData.h"
 #include "classifier/classifier.h"
 
-ClassifyData::ClassifyData(int userId) : userId(userId) {}
+ClassifyData::ClassifyData(DefaultIO* dio, int userId) : Command(dio, userId) {
+    description.assign("classify data");
+}
 
 void ClassifyData::execute() {
-    string classified = "../server/data/user_" + to_string(userId) + "_train.csv";
-    string unclassified = "../server/data/user_" + to_string(userId) + "_test.csv";
+    string train = "../server/data/user_" + to_string(userId) + "_train.csv";
+    string test = "../server/data/user_" + to_string(userId) + "_test.csv";
+    string classified = "../server/data/classified.csv";
 
     vector<Distance*> *dists = new vector<Distance*>();
     dists->push_back(getDistance());
 
     Classifier *c = new Classifier(getK(), dists,
-                           classified,unclassified);
+                           classified,train);
 
     c->predictFileByDist("../server/data/user_" + to_string(userId)
-                        + "_prediction.csv", *getDistance());
+                        + "_train_prediction.csv", *getDistance());
 
-    delete c;
+    Classifier* c1 = new Classifier(getK(), dists,
+                       classified, test);
+
+    c1->predictFileByDist("../server/data/user_" + to_string(userId)
+                         + "_test_prediction.csv", *getDistance());
     delete dists;
+    delete c;
+    delete c1;
 }
