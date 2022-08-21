@@ -2,6 +2,7 @@
 #define ASS_THREE_KNNSETTINGS_H
 
 #include "command.h"
+#include <sstream>
 #include "classifier/distances/distance.h"
 #include "classifier/distances/euclideanDistance.h"
 #include "classifier/distances/manhattanDistance.h"
