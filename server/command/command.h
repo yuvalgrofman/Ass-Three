@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include "server/IO/defaultIO.h"
+#include "classifier/distances/distance.h"
 
 using namespace std;
 
@@ -14,6 +15,9 @@ class Command {
         string description;
         DefaultIO* dio;
 
+
+        int getK();
+        Distance* getDistance();
         void writeCSVFile(string filepath, string fileContent);
 
 public:

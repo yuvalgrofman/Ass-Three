@@ -13,9 +13,6 @@ class KnnSettings : Command {
     private:
         int userId;
 
-        int getK();
-        Distance* getDistance();
-
     public:
         KnnSettings(int userId);
         void execute() override;
