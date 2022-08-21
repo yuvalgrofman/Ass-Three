@@ -21,6 +21,7 @@ class Classifier {
         const DataSpace* dataSpace;
         vector<FlowerPoint*>* unclassifiedFLowers;
 
+    public:
         /**
          * Creates a file with the given name and predicts the flower type of the unclassified flowers,
          * according to the k-nearest neighbors algorithm using the given distance.
@@ -29,7 +30,7 @@ class Classifier {
          */
         void predictFileByDist(const string &outputFile, Distance &distance) const;
 
-    public:
+
         /**
          * Constructor.
          * @param k integer which represents the number of neighbors to use

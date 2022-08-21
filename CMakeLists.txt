@@ -45,4 +45,6 @@ add_executable(AssThree.out
         server/IO/standardIO.h
         server/IO/socketIO.h
         server/IO/socketIO.cpp
+        server/command/classifyData.h
+        server/command/classifyData.cpp
         )
