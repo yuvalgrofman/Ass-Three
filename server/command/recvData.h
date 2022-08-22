@@ -4,7 +4,7 @@
 #include "server/command/command.h"
 #include <string>
 
-class RecvData : Command {
+class RecvData : public Command {
 
     public:
         RecvData(DefaultIO* dio, int userId);

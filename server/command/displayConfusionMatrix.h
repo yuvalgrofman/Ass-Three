@@ -3,7 +3,7 @@
 
 #include "command.h"
 
-class DisplayConfusionMatrix : Command {
+class DisplayConfusionMatrix : public Command {
 
     public:
         DisplayConfusionMatrix(DefaultIO* dio, int userId);

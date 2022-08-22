@@ -3,7 +3,7 @@
 
 #include "command.h"
 
-class DisplayData : Command {
+class DisplayData : public Command {
 
     public:
         DisplayData(DefaultIO* dio, int userId);
