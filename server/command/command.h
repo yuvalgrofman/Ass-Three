@@ -19,6 +19,7 @@ class Command {
         DefaultIO* dio;
         int userId;
 
+        map<string, int>& getClassificationOptions() const;
         int getK() const;
         Distance* getDistance() const;
         void writeCSVFile(string filepath, string fileContent) const;

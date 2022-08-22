@@ -1,3 +1,5 @@
+#include <set>
+#include <map>
 #include "command.h"
 
 Command::Command(DefaultIO *dio, int userId) : dio(dio), userId(userId) {}
@@ -61,4 +63,32 @@ Distance* Command::getDistance() const {
     delete cheb;
 
     return d;
+}
+
+map<string, int>& Command::getClassificationOptions() const {
+    ifstream istream = ifstream("../server/data/user_" + to_string(userId) + "_test.csv");
+
+    if (!istream.is_open()) {
+        //TODO: print error
+    }
+
+    map<string, int> &options = *(new map<string, int>());
+
+    string line;
+    getline(istream, line);
+
+    int index = 0;
+    while (!line.empty()) {
+        string type = line.substr(line.find_last_of(',') + 1);
+
+        if (options.find(type) == options.end()) {
+            options.insert({type, index});
+            index++;
+        }
+
+
+        getline(istream, line);
+    }
+
+    return options;
 }
