@@ -54,4 +54,13 @@ add_executable(AssThree.out
         server/command/close.cpp
         server/command/close.h
         server/command/displayConfusionMatrix.cpp
-        server/command/displayConfusionMatrix.h)
+        server/command/displayConfusionMatrix.h
+        classifier/classifiable/classifiable.cpp
+        classifier/classifiable/classifiable.h
+        classifier/classifiable/dataPoint.cpp
+        classifier/classifiable/dataPoint.h
+        classifier/classifiable/dataReader.cpp
+        classifier/classifiable/dataReader.h
+        classifier/classifiable/dataSorter.cpp
+        classifier/classifiable/dataSorter.h
+        )
