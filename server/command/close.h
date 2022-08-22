@@ -3,7 +3,7 @@
 
 #include "command.h"
 
-class Close : Command {
+class Close : public Command {
 
     public:
         Close(DefaultIO* dio, int userId);

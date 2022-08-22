@@ -3,7 +3,7 @@
 
 #include "command.h"
 
-class ClassifyData : Command {
+class ClassifyData : public Command {
 
     public:
         ClassifyData(DefaultIO* dio, int userId);

@@ -8,7 +8,7 @@
 #include "classifier/distances/manhattanDistance.h"
 #include "classifier/distances/chebyshevDistance.h"
 
-class KnnSettings : Command {
+class KnnSettings : public Command {
 
     public:
         KnnSettings(DefaultIO* dio, int userId);

@@ -4,9 +4,15 @@
 #include "server/IO/defaultIO.h"
 #include "server/command/command.h"
 #include "server/command/recvData.h"
-#include <unordered_map>
+#include "server/command/knnSettings.h"
+#include "server/command/classifyData.h"
+#include "server/command/displayData.h"
+#include "server/command/uploadData.h"
+#include "server/command/displayConfusionMatrix.h"
+#include "server/command/close.h"
+#include <map>
 
-unordered_map<int, Command*>* getCommands(DefaultIO* dio, int userId);
+map<int, Command*>* getCommands(DefaultIO* dio, int userId);
 
 /**
  * Server is responsible for communication with a single client.
