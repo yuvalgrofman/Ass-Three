@@ -4,11 +4,11 @@
 #include "command.h"
 #include <string>
 
-class recvData : Command {
+class RecvData : Command {
 
     public:
-        recvData(DefaultIO* dio, int userId);
-        void execute() override;
+        RecvData(DefaultIO* dio, int userId);
+        virtual void execute() override;
 
 };
 

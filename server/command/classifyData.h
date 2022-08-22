@@ -6,8 +6,8 @@
 class ClassifyData : Command{
 
     public:
-            ClassifyData(DefaultIO* dio, int userId);
-            virtual void execute() override;
+        ClassifyData(DefaultIO* dio, int userId);
+        virtual void execute() override;
 
 };
 

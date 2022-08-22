@@ -2,7 +2,7 @@
 
 Command::Command(DefaultIO *dio, int userId) : dio(dio), userId(userId) {}
 
-void Command::writeCSVFile(string filepath, string fileContent) {
+void Command::writeCSVFile(string filepath, string fileContent) const {
     ofstream ostream(filepath);
 
     if (!ostream.is_open()) {
@@ -13,7 +13,7 @@ void Command::writeCSVFile(string filepath, string fileContent) {
     ostream.close();
 }
 
-int Command::getK() {
+int Command::getK() const {
     ifstream istream("../server/data/user_" + to_string(userId) + "_config.csv");
 
     if (!istream.is_open()) {
@@ -26,7 +26,7 @@ int Command::getK() {
     return stoi(line);
 }
 
-Distance* Command::getDistance() {
+Distance* Command::getDistance() const {
     ifstream istream("../server/data/user_" + to_string(userId) + "_config.csv");
 
     if (!istream.is_open()) {

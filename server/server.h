@@ -1,36 +1,30 @@
 #ifndef ASS_TWO_SERVER_H
 #define ASS_TWO_SERVER_H
 
-#include <iostream>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <string.h>
-#include "classifier/flower/flower.h"
-#include "classifier/classifier.h"
-#include "classifier/distances/euclideanDistance.h"
+#include "server/IO/defaultIO.h"
+#include "server/command/command.h"
+#include "server/command/recvData.h"
+#include <unordered_map>
 
+unordered_map<int, Command*>* getCommands(DefaultIO* dio, int userId);
+
+/**
+ * Server is responsible for communication with a single client.
+ * Therefore, the server receives in the constructor a IO to the user and
+ * an integer which represents the userId.
+ * The server_handler will be responsible for creating
+ * new servers in different threads with the appropriate instance of DefaultIO and userId.
+ */
 class Server {
 
     private:
-        int server_port;
-        int server_socket;
-        int client_sock;
-        int commOverFlag;
-        DataSpace* dataSpace;
+        DefaultIO* dio;
+        int userId;
 
     public:
-        static const int BUFFER_SIZE = 4096;
-        Server(int port);
-        void connect();
-
-        FlowerPoint& receiveFlowerPoint();
-        void sendClassification(FlowerPoint& flower, int k, Distance* distance);
-        void closeServer() const;
-        int isCommOver();
-        ~Server();
+        Server(DefaultIO* dio, int userId);
+        void run();
+        void close();
 };
 
 #endif //ASS_TWO_SERVER_H
