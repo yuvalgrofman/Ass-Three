@@ -47,4 +47,11 @@ add_executable(AssThree.out
         server/IO/socketIO.cpp
         server/command/classifyData.h
         server/command/classifyData.cpp
-        server/command/displayData.cpp server/command/displayData.h server/command/uploadData.cpp server/command/uploadData.h server/command/close.cpp server/command/close.h server/command/displayConfusionMatrix.cpp server/command/displayConfusionMatrix.h)
+        server/command/displayData.cpp
+        server/command/displayData.h
+        server/command/uploadData.cpp
+        server/command/uploadData.h
+        server/command/close.cpp
+        server/command/close.h
+        server/command/displayConfusionMatrix.cpp
+        server/command/displayConfusionMatrix.h)

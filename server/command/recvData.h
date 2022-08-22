@@ -1,7 +1,7 @@
 #ifndef ASS_THREE_RECVDATA_H
 #define ASS_THREE_RECVDATA_H
 
-#include "command.h"
+#include "server/command/command.h"
 #include <string>
 
 class RecvData : Command {
