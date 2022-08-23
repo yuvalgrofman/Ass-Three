@@ -18,5 +18,5 @@ double ManhattanDistance::getDistance(const DataPoint& p1, const DataPoint& p2) 
 }
 
 string ManhattanDistance::getName() const {
-    return "manhattan";
+    return "MAN";
 }

@@ -15,5 +15,5 @@ double EuclideanDistance::getDistance(const DataPoint& p1, const DataPoint& p2) 
 }
 
 string EuclideanDistance::getName() const {
-    return "euclidean";
+    return "EUC";
 }

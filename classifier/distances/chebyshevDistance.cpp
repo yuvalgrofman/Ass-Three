@@ -23,5 +23,5 @@ double ChebyshevDistance::getDistance(const DataPoint& p1, const DataPoint& p2) 
 }
 
 string ChebyshevDistance::getName() const {
-    return "chebyshev";
+    return "CHE";
 }
