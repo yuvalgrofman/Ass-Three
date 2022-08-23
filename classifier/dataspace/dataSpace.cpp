@@ -1,46 +1,50 @@
 #include "dataSpace.h"
 #include <vector>
+#include <map>
 #include <iostream>
-#include "classifier/flower/flowerSorter.h"
+#include "classifier/classifiable/dataSorter.h"
 
 using namespace std;
 
-DataSpace::DataSpace(const Flower** data, const int numFlowers): numFlowers(numFlowers) {
+DataSpace::DataSpace(const Classifiable** data, const int numClassifiables):
+                    numClassifiables(numClassifiables) {
     this->data = data;
 }
 
 DataSpace::~DataSpace() {
-    for (int i = 0; i < numFlowers; i++) {
+    for (int i = 0; i < numClassifiables; i++) {
         delete data[i];
     }
     delete[] data;
 }
 
-FlowerType DataSpace::predict(int k, const FlowerPoint& flower, Distance& distance) const {
-    const Flower *arr[numFlowers];
-    for (int i = 0; i < numFlowers; i++) {
+string DataSpace::predict(int k, const DataPoint& dataPoint, Distance& distance) const {
+    const Classifiable *arr[numClassifiables];
+    for (int i = 0; i < numClassifiables; i++) {
         arr[i] = data[i];
     }
-    FlowerSorter sorter(flower, distance);
-    sorter.sortFlowerList(arr, numFlowers);
+    DataSorter sorter(dataPoint, distance);
+    sorter.sortClassifiableList(arr, numClassifiables);
 
-    int closestNeighboursCount[NUM_FLOWER_TYPES];
-    for (int i = 0; i < NUM_FLOWER_TYPES; i++) {
-        closestNeighboursCount[i] = 0;
-    }
-
+    map<string, int> classificationCount;
     for (int i = 0; i < k; i++) {
-        int a = arr[i]->getType();
-        closestNeighboursCount[a]++;
-    }
-
-    int max = -1;
-    FlowerType maxType;
-    for (int i = 0; i < NUM_FLOWER_TYPES; i++) {
-        if (closestNeighboursCount[i] > max) {
-            max = closestNeighboursCount[i];
-            maxType = static_cast<FlowerType>(i);
+        string type = arr[i]->getType();
+        if (classificationCount.find(type) == classificationCount.end()) {
+            classificationCount.insert(pair<string, int>(type, 1));
+        } else {
+            classificationCount[type]++;
         }
     }
+
+    string maxType = "";
+    int maxCount = 0;
+    for (map<string, int>::iterator it = classificationCount.begin();
+                    it != classificationCount.end(); it++) {
+        if (it->second > maxCount) {
+            maxCount = it->second;
+            maxType = it->first;
+        }
+    }
+
     return maxType;
 }

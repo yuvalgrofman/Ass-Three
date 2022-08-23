@@ -1,36 +1,37 @@
 #ifndef ASS_ONE_DATA_SPACE_H
 #define ASS_ONE_DATA_SPACE_H
 
-#include "classifier/flower/flower.h"
+#include "classifier/classifiable/classifiable.h"
 #include "classifier/distances/distance.h"
 
 /**
  * @brief The DataSpace class
  *
  * This class represents a data space.
- * It contains a array of pointers to flowers and a integer which represents the number of flowers.
+ * It contains a array of pointers to classifiable objects and an
+ * integer which represents the number of classifiable objects.
  */
 class DataSpace {
     private:
-        const int numFlowers;
-        const Flower **data;
+        const int numClassifiables;
+        const Classifiable **data;
 
     public:
         /**
          * Constructor.
-         * @param numFlowers number of flowers in the data space
-         * @param data array of pointers to flowers
+         * @param numClassifiables - the number of classifiable objects in the data space.
+         * @param data array of pointers to classifiable objects.
          */
-        DataSpace(const Flower** data, const int numFlowers);
+        DataSpace(const Classifiable** data, const int numClassifiables);
 
         /**
-         * predicts the type of the flower-point based on the k nearest neighbors.
-         * @param k integer which represents the number of neighbors to use
-         * @param flowerPoint flower point to predict
-         * @param distance distance class to use
-         * @return the type of the flower-point
+         * predicts the type of the data-point based on the k nearest neighbors.
+         * @param k integer which represents the number of neighbors to use.
+         * @param dataPoint data point to predict.
+         * @param distance distance class to use.
+         * @return the predicted type of the data-point.
          */
-        FlowerType predict(int k, const FlowerPoint& flowerPoint, Distance& distance) const;
+        string predict(int k, const DataPoint& dataPoint, Distance& distance) const;
 
         /**
          * Destructor.
