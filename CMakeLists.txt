@@ -16,21 +16,12 @@ add_executable(AssThree.out
         classifier/distances/distance.h
         classifier/distances/euclideanDistance.cpp
         classifier/distances/euclideanDistance.h
-        classifier/flower/flower.cpp
-        classifier/flower/flower.h
-        classifier/flower/flowerPoint.cpp
-        classifier/flower/flowerPoint.h
-        classifier/flower/flowerReader.cpp
-        classifier/flower/flowerReader.h
-        classifier/flower/flowerType.h
-        classifier/flower/flowerType.cpp
         classifier/distances/manhattanDistance.cpp
         classifier/distances/manhattanDistance.h
         classifier/classifier.cpp
         classifier/classifier.h
-        classifier/flower/flowerSorter.h
-        classifier/flower/flowerSorter.cpp
-        server/server.h server/server.cpp
+        server/server.h
+        server/server.cpp
         main.cpp
         server/server_handler.cpp
         server/server_handler.h
