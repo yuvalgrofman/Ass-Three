@@ -13,7 +13,6 @@ class DataPoint {
         DataPoint(const double data[], int size);
         double getVariable(int index) const;
         int getNumberOfVariables() const;
-        DataPoint(const vector<double> &data);
         ~DataPoint();
 };
 

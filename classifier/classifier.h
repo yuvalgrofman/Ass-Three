@@ -17,7 +17,6 @@ using namespace std;
 class Classifier {
     private:
         const int k;
-        const vector<Distance*>* distances;
         const DataSpace* dataSpace;
         vector<DataPoint*>* unclassifiedPoints;
 
@@ -30,22 +29,13 @@ class Classifier {
          */
         void predictFileByDist(const string &outputFile, Distance &distance) const;
 
-
         /**
          * Constructor.
          * @param k integer which represents the number of neighbors to use
-         * @param distances vector of pointers to distance classes
          * @param classifiedData path to the file containing the classified data
          * @param unclassifiedData path to the file containing the unclassified data
          */
-        Classifier(int k, vector<Distance*>* distances, const string& classifiedData, const string& unclassifiedData);
-
-        /**
-         * Classifies the unclassified data.
-         * For each distance class, a file is created containing the
-         * predicted classified types according to the distance class.
-         */
-        void classify();
+        Classifier(int k, const string& classifiedData, const string& unclassifiedData);
 
         /**
          * Classifies the given data-point.

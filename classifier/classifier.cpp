@@ -1,7 +1,7 @@
 #include "classifier.h"
 
-Classifier::Classifier(int k, vector<Distance*>* distances, const string& classifiedData,
-                       const string& unclassifiedData) : k(k), distances(distances) {
+Classifier::Classifier(int k, const string& classifiedData,
+                       const string& unclassifiedData) : k(k) {
     unclassifiedPoints = new vector<DataPoint*>();
 
     DataReader &unClassifiedReader = *(new DataReader(unclassifiedData));
@@ -19,12 +19,6 @@ Classifier::Classifier(int k, vector<Distance*>* distances, const string& classi
     dataSpace = &creator.makeDataSpace();
 
     delete &classifiedReader;
-}
-
-void Classifier::classify() {
-    for (Distance *distance : *distances) {
-        predictFileByDist(distance->getName() + "_output.csv", *distance);
-    }
 }
 
 void Classifier::predictFileByDist(const string &outputFile, Distance &distance) const {
