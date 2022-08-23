@@ -1,8 +1,6 @@
 #include "close.h"
 
-Close::Close(DefaultIO *dio, int userId) : Command(dio, userId) {
-    description.assign("exit");
-}
+Close::Close(DefaultIO *dio, int userId) : Command(dio, userId, "exit") {}
 
 void Close::execute() {
     dio->close();

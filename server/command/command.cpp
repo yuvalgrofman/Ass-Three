@@ -2,7 +2,7 @@
 #include <map>
 #include "command.h"
 
-Command::Command(DefaultIO *dio, int userId) : dio(dio), userId(userId) {}
+Command::Command(DefaultIO *dio, int userId, string description) : dio(dio), userId(userId), description(description) {}
 
 void Command::writeCSVFile(string filepath, string fileContent) const {
     ofstream ostream(filepath);
@@ -91,4 +91,8 @@ map<string, int>& Command::getClassificationOptions() const {
     }
 
     return options;
+}
+
+string Command::getDescription() const {
+    return description;
 }

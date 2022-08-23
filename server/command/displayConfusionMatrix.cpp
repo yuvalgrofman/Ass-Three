@@ -1,7 +1,7 @@
 #include "displayConfusionMatrix.h"
 #include <map>
 
-DisplayConfusionMatrix::DisplayConfusionMatrix(DefaultIO* dio, int userId) : Command(dio, userId) {}
+DisplayConfusionMatrix::DisplayConfusionMatrix(DefaultIO* dio, int userId) : Command(dio, userId, "display algorithm confusion matrix") {}
 
 void DisplayConfusionMatrix::execute() {
     map<string, int> &types = getClassificationOptions();

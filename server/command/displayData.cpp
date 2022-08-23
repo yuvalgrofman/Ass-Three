@@ -1,8 +1,6 @@
 #include "displayData.h"
 
-DisplayData::DisplayData(DefaultIO *dio, int userId) : Command(dio, userId) {
-    description.assign("display results");
-}
+DisplayData::DisplayData(DefaultIO *dio, int userId) : Command(dio, userId, "display results") {}
 
 void DisplayData::execute() {
     ifstream istream("../server/data/user_" + to_string(userId)
