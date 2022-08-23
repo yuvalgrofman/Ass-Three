@@ -15,18 +15,20 @@
 class Command {
 
     protected:
-        string description;
         DefaultIO* dio;
         int userId;
+        string description;
 
-        map<string, int>& getClassificationOptions() const;
+    map<string, int>& getClassificationOptions() const;
         int getK() const;
         Distance* getDistance() const;
         void writeCSVFile(string filepath, string fileContent) const;
 
     public:
-        Command(DefaultIO* dio, int userId);
+        Command(DefaultIO* dio, int userId, string description);
         virtual void execute() = 0;
+
+        string getDescription() const;
 };
 
 #endif //ASS_TWO_COMMAND_H

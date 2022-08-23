@@ -2,9 +2,7 @@
 #include "classifyData.h"
 #include "classifier/classifier.h"
 
-ClassifyData::ClassifyData(DefaultIO* dio, int userId) : Command(dio, userId) {
-    description.assign("classify data");
-}
+ClassifyData::ClassifyData(DefaultIO* dio, int userId) : Command(dio, userId, "classify data") {}
 
 void ClassifyData::execute() {
     string train = "../server/data/user_" + to_string(userId) + "_train.csv";

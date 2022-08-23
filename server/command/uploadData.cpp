@@ -1,8 +1,6 @@
 #include "uploadData.h"
 
-UploadData::UploadData(DefaultIO *dio, int userId) : Command(dio, userId) {
-    description.assign("download results");
-}
+UploadData::UploadData(DefaultIO *dio, int userId) : Command(dio, userId, "download results") {}
 
 void UploadData::execute() {
     ifstream istream;

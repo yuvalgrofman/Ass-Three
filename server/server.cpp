@@ -23,6 +23,10 @@ void Server::run() {
         bool validInput = false;
 
         do {
+            std::for_each(map->begin(), map->end(), [&](std::pair<const int, Command*>& pair) {
+                dio->write(to_string(pair.first) + ". " + pair.second->getDescription());
+            });
+
             string in = dio->read();
 
             if (!in.empty() && std::all_of(in.begin(), in.end(), ::isdigit)) {
