@@ -5,11 +5,21 @@
 using namespace std;
 
 
-double ChebyshevDistance::getDistance(const FlowerPoint& p1, const FlowerPoint& p2) const {
-   return max(abs(p1.getPetalLength() - p2.getPetalLength()),
-          max(abs(p1.getSepalLength() - p2.getSepalLength()),
-          max(abs(p1.getSepalWidth() - p2.getSepalWidth()),
-              abs(p1.getWidth() - p2.getWidth()))));
+double ChebyshevDistance::getDistance(const DataPoint& p1, const DataPoint& p2) const {
+    if (p1.getNumberOfVariables() != p2.getNumberOfVariables()) {
+        perror("Error: the number of variables in the two points is not equal");
+    }
+
+    double maxDist = 0;
+    int numberOfVariables = p1.getNumberOfVariables();
+    for (int i = 0; i < numberOfVariables; i++) {
+        double diff = abs(p1.getVariable(i) - p2.getVariable(i));
+        if (diff > maxDist) {
+            maxDist = diff;
+        }
+    }
+
+   return maxDist;
 }
 
 string ChebyshevDistance::getName() const {

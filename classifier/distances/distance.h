@@ -1,7 +1,7 @@
 #ifndef ASS_ONE_DISTANCE
 #define ASS_ONE_DISTANCE
 
-#include "classifier/flower/flowerPoint.h"
+#include "classifier/classifiable/dataPoint.h"
 #include "string"
 
 using namespace std;
@@ -20,7 +20,7 @@ class Distance {
          * @param p2 second point
          * @return the distance between the two points
          */
-        virtual double getDistance(const FlowerPoint& p1, const FlowerPoint& p2) const = 0;
+        virtual double getDistance(const DataPoint& p1, const DataPoint& p2) const = 0;
 
         /**
          * @brief getName

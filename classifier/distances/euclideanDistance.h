@@ -12,7 +12,7 @@
  */
 class EuclideanDistance : public Distance {
 public:
-    virtual double getDistance(const FlowerPoint& p1, const FlowerPoint& p2) const;
+    virtual double getDistance(const DataPoint& p1, const DataPoint& p2) const;
     virtual string getName() const;
 };
 #endif //ASS_ONE_EUCLIDEAN_DISTANCE
