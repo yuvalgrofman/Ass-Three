@@ -22,8 +22,21 @@ int Command::getK() const {
         //TODO: print error
     }
 
+    if (istream.peek() == std::ifstream::traits_type::eof()) {
+        ofstream ostream("../server/data/user_" + to_string(userId) + "_config.csv");
+
+        if (!ostream.is_open()) {
+            //TODO: print error
+        }
+
+        ostream << "5\n";
+        ostream << "EUC";
+        ostream.close();
+    }
+
     string line;
     getline(istream, line);
+    istream.close();
 
     return stoi(line);
 }
@@ -63,34 +76,6 @@ Distance* Command::getDistance() const {
     delete cheb;
 
     return d;
-}
-
-map<string, int>& Command::getClassificationOptions() const {
-    ifstream istream = ifstream("../server/data/user_" + to_string(userId) + "_test.csv");
-
-    if (!istream.is_open()) {
-        //TODO: print error
-    }
-
-    map<string, int> &options = *(new map<string, int>());
-
-    string line;
-    getline(istream, line);
-
-    int index = 0;
-    while (!line.empty()) {
-        string type = line.substr(line.find_last_of(',') + 1);
-
-        if (options.find(type) == options.end()) {
-            options.insert({type, index});
-            index++;
-        }
-
-
-        getline(istream, line);
-    }
-
-    return options;
 }
 
 string Command::getDescription() const {

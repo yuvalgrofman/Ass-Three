@@ -1,7 +1,36 @@
 #include "displayConfusionMatrix.h"
 #include <map>
 
-DisplayConfusionMatrix::DisplayConfusionMatrix(DefaultIO* dio, int userId) : Command(dio, userId, "display algorithm confusion matrix") {}
+map<string, int>& DisplayConfusionMatrix::getClassificationOptions() const {
+    ifstream istream = ifstream("../server/data/user_" + to_string(userId) + "_test.csv");
+
+    if (!istream.is_open()) {
+        //TODO: print error
+    }
+
+    map<string, int> &options = *(new map<string, int>());
+
+    string line;
+    getline(istream, line);
+
+    int index = 0;
+    while (!line.empty()) {
+        string type = line.substr(line.find_last_of(',') + 1);
+
+        if (options.find(type) == options.end()) {
+            options.insert({type, index});
+            index++;
+        }
+
+
+        getline(istream, line);
+    }
+
+    return options;
+}
+
+DisplayConfusionMatrix::DisplayConfusionMatrix(DefaultIO* dio, int userId) : Command(dio, userId,
+ "display algorithm confusion matrix") {}
 
 void DisplayConfusionMatrix::execute() {
     map<string, int> &types = getClassificationOptions();

@@ -12,6 +12,8 @@
 #include "classifier/distances/chebyshevDistance.h"
 #include "server/command/command.h"
 
+using namespace std;
+
 class Command {
 
     protected:
@@ -19,7 +21,7 @@ class Command {
         int userId;
         string description;
 
-    map<string, int>& getClassificationOptions() const;
+
         int getK() const;
         Distance* getDistance() const;
         void writeCSVFile(string filepath, string fileContent) const;
