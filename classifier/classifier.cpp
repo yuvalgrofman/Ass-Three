@@ -1,21 +1,20 @@
 #include "classifier.h"
 
-
 Classifier::Classifier(int k, vector<Distance*>* distances, const string& classifiedData,
                        const string& unclassifiedData) : k(k), distances(distances) {
-    unclassifiedFLowers = new vector<FlowerPoint*>();
+    unclassifiedPoints = new vector<DataPoint*>();
 
-    FlowerReader &unClassifiedReader = *(new FlowerReader(unclassifiedData));
-    FlowerPoint* ptr = unClassifiedReader.readFlowerPoint();
+    DataReader &unClassifiedReader = *(new DataReader(unclassifiedData));
+    DataPoint* ptr = unClassifiedReader.readDataPoint();
 
     while (ptr != nullptr) {
-        unclassifiedFLowers->push_back(ptr);
-        ptr = unClassifiedReader.readFlowerPoint();
+        unclassifiedPoints->push_back(ptr);
+        ptr = unClassifiedReader.readDataPoint();
     }
 
     delete &unClassifiedReader;
 
-    FlowerReader &classifiedReader = *(new FlowerReader(classifiedData));
+    DataReader &classifiedReader = *(new DataReader(classifiedData));
     DataSpaceCreator creator = DataSpaceCreator(classifiedReader);
     dataSpace = &creator.makeDataSpace();
 
@@ -32,21 +31,21 @@ void Classifier::predictFileByDist(const string &outputFile, Distance &distance)
     ofstream outfile;
     outfile.open(outputFile, ios::out);
 
-    for (FlowerPoint *flower : *unclassifiedFLowers) {
-        outfile << dataSpace->predict(k, *flower, distance) << endl;
+    for (DataPoint *point : *unclassifiedPoints) {
+        outfile << dataSpace->predict(k, *point, distance) << endl;
     }
 
     outfile.close();
 }
 
-FlowerType Classifier::classify(FlowerPoint &flowerPoint, Distance &distance) {
-    return dataSpace->predict(k, flowerPoint, distance);
+string Classifier::classify(DataPoint &dataPoint, Distance &distance) {
+    return dataSpace->predict(k, dataPoint, distance);
 }
 
 Classifier::~Classifier() {
     delete dataSpace;
-    for (FlowerPoint *flowerPoint : *unclassifiedFLowers) {
-        delete flowerPoint;
+    for (DataPoint *point : *unclassifiedPoints) {
+        delete point;
     }
-    delete unclassifiedFLowers;
+    delete unclassifiedPoints;
 }
