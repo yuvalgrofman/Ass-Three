@@ -1,27 +1,28 @@
 #include "dataSpaceCreator.h"
 
 DataSpace& DataSpaceCreator::makeDataSpace() const {
-    const Flower** data = new const Flower*[length()];
+    const Classifiable **data = new const Classifiable*[length()];
 
     for (int i = 0; i < length(); i++) {
-        data[i] = flowers.at(i);
+        data[i] = classifiables.at(i);
     }
+
     DataSpace* dataSpace = new DataSpace(data, length());
     return *dataSpace;
 }
 
 int DataSpaceCreator::length() const {
-    return (int) flowers.size();
+    return (int) classifiables.size();
 }
 
-void DataSpaceCreator::add(const Flower* flower) {
-    flowers.push_back(flower);
+void DataSpaceCreator::add(const Classifiable* classifiable) {
+    classifiables.push_back(classifiable);
 }
 
-DataSpaceCreator::DataSpaceCreator(FlowerReader& reader) {
-    Flower* ptr = reader.readFlower();
+DataSpaceCreator::DataSpaceCreator(DataReader& reader) {
+    Classifiable* ptr = reader.readClassifiable();
     while (ptr != nullptr) {
         add(ptr);
-        ptr = reader.readFlower();
+        ptr = reader.readClassifiable();
     }
 }
