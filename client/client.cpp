@@ -66,13 +66,36 @@ void Client::setKnnSettings() const {
     string serverMessage = "";
 
     do {
-        cin >> input;
+        getline(cin, input);
         dio->write(input);
 
         serverMessage = dio->read();
 
-        if (serverMessage.compare("DONE")) {
+        if (serverMessage.compare("DONE\n")) {
             cout << serverMessage;
         }
-    } while (serverMessage.compare("DONE"));
+    } while (serverMessage.compare("DONE\n"));
 }
+
+void Client::classifyData() const {}
+
+void Client::displayData() const {
+    string str = "garbage value";
+
+    while (str.compare("Done.\n")) {
+        str = dio->read();
+        cout << str;
+    }
+
+    cout << str;
+}
+
+void Client::displayConfusionMatrix() const {
+    //TODO: implement function
+}
+
+void Client::downloadData() const {
+    //TODO: implement function
+}
+
+void Client::exit() const {}

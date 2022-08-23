@@ -13,5 +13,5 @@ void DisplayData::execute() {
         dio->write(to_string(lineNumber) + " " + word + "\n");
     }
 
-    dio->write("Done.");
+    dio->write("Done.\n");
 }

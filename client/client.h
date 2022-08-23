@@ -18,6 +18,11 @@ class Client {
 
         void uploadData() const;
         void setKnnSettings() const;
+        void classifyData() const;
+        void displayData() const;
+        void downloadData() const;
+        void displayConfusionMatrix() const;
+        void exit() const;
 
     public:
         Client(DefaultIO* dio);
