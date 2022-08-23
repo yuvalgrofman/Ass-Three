@@ -54,4 +54,4 @@ add_executable(AssThree.out
         classifier/classifiable/dataReader.h
         classifier/classifiable/dataSorter.cpp
         classifier/classifiable/dataSorter.h
-        )
+        client/client.cpp client/client.h server/IO/streamIO.cpp server/IO/streamIO.h)

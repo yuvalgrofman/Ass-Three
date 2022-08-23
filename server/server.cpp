@@ -19,14 +19,14 @@ Server::Server(DefaultIO *dio, int userId) : dio(dio), userId(userId) {}
 
 void Server::run() {
     map<int, Command*>* map = getCommands(dio, userId);
-    int op;
+    int op = 1;
 
     while (op != 7) {
         bool validInput = false;
 
         do {
             std::for_each(map->begin(), map->end(), [&](std::pair<const int, Command*>& pair) {
-                dio->write(to_string(pair.first) + ". " + pair.second->getDescription());
+                dio->write(to_string(pair.first) + ". " + pair.second->getDescription() + "\n");
             });
 
             string in = dio->read();

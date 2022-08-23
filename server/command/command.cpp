@@ -32,6 +32,8 @@ int Command::getK() const {
         ostream << "5\n";
         ostream << "EUC";
         ostream.close();
+
+        return 5;
     }
 
     string line;
@@ -46,6 +48,20 @@ Distance* Command::getDistance() const {
 
     if (!istream.is_open()) {
         //TODO: print error
+    }
+
+    if (istream.peek() == std::ifstream::traits_type::eof()) {
+        ofstream ostream("../server/data/user_" + to_string(userId) + "_config.csv");
+
+        if (!ostream.is_open()) {
+            //TODO: print error
+        }
+
+        ostream << "5\n";
+        ostream << "EUC";
+        ostream.close();
+
+        return new EuclideanDistance();
     }
 
     string line;
