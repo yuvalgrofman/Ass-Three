@@ -12,14 +12,12 @@ void ClassifyData::execute() {
     vector<Distance*> *dists = new vector<Distance*>();
     dists->push_back(getDistance());
 
-    Classifier *c = new Classifier(getK(), dists,
-                           classified,train);
+    Classifier *c = new Classifier(getK(),classified,train);
 
     c->predictFileByDist("../server/data/user_" + to_string(userId)
                         + "_train_prediction.csv", *getDistance());
 
-    Classifier* c1 = new Classifier(getK(), dists,
-                       classified, test);
+    Classifier* c1 = new Classifier(getK(),classified, test);
 
     c1->predictFileByDist("../server/data/user_" + to_string(userId)
                          + "_test_prediction.csv", *getDistance());

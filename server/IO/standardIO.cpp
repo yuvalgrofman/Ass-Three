@@ -11,4 +11,4 @@ void StandardIO::write(string str) const {
     cout << str << endl;
 }
 
-void close(){}
+void StandardIO::close() const {}

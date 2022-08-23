@@ -2,7 +2,6 @@
 #define ASS_ONE_MANHATTAN_DISTANCE
 
 #include "distance.h"
-#include "classifier/flower/flowerPoint.h"
 
 /**
  * @brief The ManhattanDistance class

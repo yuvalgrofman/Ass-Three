@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <string.h>
 
-class SocketIO : DefaultIO {
+class SocketIO : public DefaultIO {
     private:
 
         int port;
@@ -26,7 +26,7 @@ class SocketIO : DefaultIO {
 
         virtual string read() const override;
         virtual void write(string str) const override;
-        void close() const;
+        void close() const override;
 };
 
 
