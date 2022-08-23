@@ -17,7 +17,7 @@ class SocketIO : public DefaultIO {
         int sock;
         int client_sock;
 
-        void connect();
+        void accept();
 
     public:
         static const int BUFFER_SIZE = 4096;
