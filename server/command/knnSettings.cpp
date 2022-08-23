@@ -59,4 +59,6 @@ void KnnSettings::execute() {
         string knnSettingContents = strk + "\n" + distance;
         writeCSVFile("../server/data/user_" + to_string(userId) + "_config.csv", knnSettingContents);
     }
+
+    dio->write("DONE\n");
 }
