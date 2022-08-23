@@ -13,7 +13,7 @@
 class SocketIO : DefaultIO {
     private:
 
-    int port;
+        int port;
         int sock;
         int client_sock;
 

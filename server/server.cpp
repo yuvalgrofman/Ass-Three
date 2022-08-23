@@ -31,7 +31,7 @@ void Server::run() {
 
             if (!in.empty() && std::all_of(in.begin(), in.end(), ::isdigit)) {
                 op = stoi(in);
-                validInput = 0 < op && op < 11;
+                validInput = 0 < op && op < 8;
             }
         } while (!validInput);
 
