@@ -1,11 +1,10 @@
 #include <iostream>
-#include "server/server_handler.h"
+#include "server/server.h"
+#include "server/IO/standardIO.h"
 
 int main() {
-    Server_handler* serverHandler = new Server_handler();
-    serverHandler->connect();
-    serverHandler->run();
-    serverHandler->close();
-
-    delete serverHandler;
+    DefaultIO* dio = new StandardIO();
+    Server* s = new Server(dio, 1);
+    s->run();
+    s->close();
 }

@@ -11,6 +11,8 @@ map<int, Command*>* getCommands(DefaultIO* dio, int userId) {
     map->insert(std::make_pair(5, new UploadData(dio, userId)));
     map->insert(std::make_pair(6, new DisplayConfusionMatrix(dio, userId)));
     map->insert(std::make_pair(7, new Close(dio, userId)));
+
+    return map;
 }
 
 Server::Server(DefaultIO *dio, int userId) : dio(dio), userId(userId) {}
@@ -37,4 +39,8 @@ void Server::run() {
 
         map->at(op)->execute();
     }
+}
+
+void Server::close() {
+    dio->close();
 }
