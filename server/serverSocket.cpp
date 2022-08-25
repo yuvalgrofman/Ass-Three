@@ -1,4 +1,5 @@
 #include "serverSocket.h"
+#include <string.h>
 
 ServerSocket::ServerSocket(int port) {
     this->port = port;
