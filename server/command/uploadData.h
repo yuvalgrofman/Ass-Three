@@ -3,6 +3,12 @@
 
 #include "command.h"
 
+/**
+ * @brief The UploadData class
+ *
+ * This class is Responsible for uploading the data, given by a specific user.
+ * It is a command that a user can execute, thus it inherits from the Command class.
+ */
 class UploadData : public Command {
 
     public:

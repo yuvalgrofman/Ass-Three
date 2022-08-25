@@ -3,6 +3,12 @@
 
 #include "command.h"
 
+/**
+ * @brief The Close class
+ *
+ * This class is Responsible for closing the server connection of a specific user.
+ * It is a command that a user can execute, thus it inherits from the Command class.
+ */
 class Close : public Command {
 
     public:

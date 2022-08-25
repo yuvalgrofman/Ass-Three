@@ -3,6 +3,13 @@
 
 #include "command.h"
 
+/**
+ * @brief The DisplayData class
+ *
+ * This class is Responsible for displaying the predictions made by
+ * the KNN classifier, on the data, given by a specific user.
+ * It is a command that a user can execute, thus it inherits from the Command class.
+ */
 class DisplayData : public Command {
 
     public:

@@ -14,6 +14,13 @@
 
 using namespace std;
 
+/**
+ * @brief The Command class
+ *
+ * This class is Responsible for executing a specific command of a specific user.
+ * It is an abstract class, which should be inherited by
+ * all the other commands classes which are purposed for the user to execute.
+ */
 class Command {
 
     protected:

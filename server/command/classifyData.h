@@ -3,6 +3,12 @@
 
 #include "command.h"
 
+/**
+ * @brief The ClassifyData class
+ *
+ * This class is Responsible for classifying the data, given by a specific user.
+ * It is a command that a user can execute, thus it inherits from the Command class.
+ */
 class ClassifyData : public Command {
 
     public:

@@ -8,6 +8,13 @@
 #include "classifier/distances/manhattanDistance.h"
 #include "classifier/distances/chebyshevDistance.h"
 
+/**
+ * @brief The KNNSettings class
+ *
+ * This class is Responsible for setting the KNN classifier parameters,
+ * given by a specific user.
+ * It is a command that a user can execute, thus it inherits from the Command class.
+ */
 class KnnSettings : public Command {
 
     public:

@@ -4,6 +4,12 @@
 #include "server/command/command.h"
 #include <string>
 
+/**
+ * @brief The RecvData class
+ *
+ * This class is Responsible for receiving the data, given by a specific user.
+ * It is a command that a user can execute, thus it inherits from the Command class.
+ */
 class RecvData : public Command {
 
     public:

@@ -4,6 +4,13 @@
 #include <map>
 #include "command.h"
 
+/**
+ * @brief The DisplayConfusionMatrix class
+ *
+ * This class is Responsible for displaying the confusion matrix of the data, given by a specific user,
+ * compared to the predictions made by the KNN classifier on that data.
+ * It is a command that a user can execute, thus it inherits from the Command class.
+ */
 class DisplayConfusionMatrix : public Command {
     private:
         /**
