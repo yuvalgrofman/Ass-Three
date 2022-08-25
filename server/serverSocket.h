@@ -3,6 +3,12 @@
 
 #include "IO/socketIO.h"
 
+/**
+ * @brief The ServerSocket class
+ *
+ * This class is responsible for accepting new clients and creating new servers
+ * with the appropriate instance of DefaultIO and userId.
+ */
 class ServerSocket {
     private:
         int port;
