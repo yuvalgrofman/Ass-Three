@@ -2,9 +2,11 @@
 #define ASS_THREE_SERVERRUNNER_H
 
 #include "serverSocket.h"
+#include "vector"
 
 class ServerRunner {
     private:
+        int highestId;
         ServerSocket &serverSocket;
 
         public:
