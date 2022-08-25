@@ -95,7 +95,24 @@ void Client::displayConfusionMatrix() const {
 }
 
 void Client::downloadData() const {
-    //TODO: implement function
+    string trainData = dio->read();
+    string testData = dio->read();
+
+    ofstream s;
+
+    s.open("../client/data/classified_train.csv");
+    if (!s.is_open()) {
+        //TODO: print error
+    }
+    s << trainData;
+    s.close();
+
+    s.open("../client/data/classified_test.csv");\
+    if (!s.is_open()) {
+        //TODO: print error
+    }
+    s << testData;
+    s.close();
 }
 
 void Client::exit() const {}
