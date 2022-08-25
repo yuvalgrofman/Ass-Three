@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 include_directories(.)
 
-add_executable(AssThree.out
+add_executable(Server
         classifier/distances/chebyshevDistance.cpp
         classifier/distances/chebyshevDistance.h
         classifier/dataspace/dataSpace.cpp
@@ -22,7 +22,7 @@ add_executable(AssThree.out
         classifier/classifier.h
         server/server.h
         server/server.cpp
-        main.cpp
+        serverMain.cpp
         server/server_handler.cpp
         server/server_handler.h
         server/command/command.h
@@ -54,4 +54,11 @@ add_executable(AssThree.out
         classifier/classifiable/dataReader.h
         classifier/classifiable/dataSorter.cpp
         classifier/classifiable/dataSorter.h
-        client/client.cpp client/client.h server/IO/streamIO.cpp server/IO/streamIO.h)
+         server/IO/streamIO.cpp server/IO/streamIO.h server/serverSocket.cpp server/serverSocket.h)
+
+add_executable(Client
+        client/client.h
+        client/client.cpp
+        client/clientSocket.cpp
+        client/clientSocket.h
+        clientMain.cpp)
