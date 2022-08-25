@@ -2,8 +2,8 @@
 #include "server.h"
 #include "IO/socketIO.h"
 
-void* serverThread(void *vargp) {
-    Server *server = (Server *)vargp;
+void* serverThread(void *arg) {
+    Server *server = (Server *)arg;
 
     server->run();
     server->close();
