@@ -13,13 +13,13 @@ DataPoint* detectDataPoint(const string &line) {
     vector<double> data;
 
     while(getline(streamLine, word, ',')) {
-        double value = 0;
+        double value;
         try {
             value = stod(word);
         } catch (...) {
             break;
         }
-        data.push_back(stod(word));
+        data.push_back(value);
     }
 
     double *arr;
