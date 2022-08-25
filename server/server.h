@@ -12,16 +12,15 @@
 #include "server/command/close.h"
 #include <map>
 #include <algorithm>
-#include <stdio.h>
 
 map<int, Command*>* getCommands(DefaultIO* dio, int userId);
 
 /**
  * Server is responsible for communication with a single client.
- * Therefore, the server receives in the constructor a IO to the user and
- * an integer which represents the userId.
- * The server_handler will be responsible for creating
- * new servers in different threads with the appropriate instance of DefaultIO and userId.
+ * Therefore, the server receives in the constructor an IO to communicate
+ * with the client, and an integer which represents the userId of the client.
+ * The ServerRunner will be responsible for creating new servers in different threads
+ * with the appropriate instance of DefaultIO and userId.
  */
 class Server {
 
@@ -30,8 +29,21 @@ class Server {
         int userId;
 
     public:
+        /**
+         * Constructor.
+         * @param dio - the IO to communicate with the client.
+         * @param userId - the userId of the client.
+         */
+
         Server(DefaultIO* dio, int userId);
+        /**
+         * Runs the server.
+         */
         void run();
+
+        /**
+         * Closes the server.
+         */
         void close();
 };
 
