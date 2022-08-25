@@ -11,6 +11,8 @@
 #include "server/command/displayConfusionMatrix.h"
 #include "server/command/close.h"
 #include <map>
+#include <algorithm>
+#include <stdio.h>
 
 map<int, Command*>* getCommands(DefaultIO* dio, int userId);
 

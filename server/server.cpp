@@ -1,4 +1,3 @@
-#include <algorithm>
 #include "server.h"
 
 map<int, Command*>* getCommands(DefaultIO* dio, int userId) {
@@ -25,9 +24,13 @@ void Server::run() {
         bool validInput = false;
 
         do {
+            string options;
+
             std::for_each(map->begin(), map->end(), [&](std::pair<const int, Command*>& pair) {
-                dio->write(to_string(pair.first) + ". " + pair.second->getDescription() + "\n");
+                options += (to_string(pair.first) + ". " + pair.second->getDescription() + "\n");
             });
+
+            dio->write(options);
 
             string in = dio->read();
 
@@ -42,5 +45,7 @@ void Server::run() {
 }
 
 void Server::close() {
+    //TODO: remove files server created
+    //    if (remove("../server/data/user...")) ...
     dio->close();
 }
