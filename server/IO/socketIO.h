@@ -9,20 +9,17 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
+#include <algorithm>
 
 class SocketIO : public DefaultIO {
     private:
-
-        int port;
-        int sock;
         int client_sock;
-
-        void accept();
 
     public:
         static const int BUFFER_SIZE = 4096;
+        static const char END_OF_MESSAGE = ';';
 
-        SocketIO(int port = 5555);
+        SocketIO(int client_sock);
 
         virtual string read() const override;
         virtual void write(string str) const override;
