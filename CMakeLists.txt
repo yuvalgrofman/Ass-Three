@@ -23,8 +23,6 @@ add_executable(Server
         server/server.h
         server/server.cpp
         serverMain.cpp
-        server/server_handler.cpp
-        server/server_handler.h
         server/command/command.h
         server/IO/defaultIO.h
         server/command/recvData.cpp
@@ -54,7 +52,15 @@ add_executable(Server
         classifier/classifiable/dataReader.h
         classifier/classifiable/dataSorter.cpp
         classifier/classifiable/dataSorter.h
-         server/IO/streamIO.cpp server/IO/streamIO.h server/serverSocket.cpp server/serverSocket.h)
+        server/IO/streamIO.cpp
+        server/IO/streamIO.h
+        server/serverSocket.cpp
+        server/serverSocket.h
+        server/serverRunner.cpp
+        server/serverRunner.h
+        server/serverThread.h
+        server/serverThread.cpp
+        )
 
 add_executable(Client
         client/client.h
