@@ -7,14 +7,19 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <map>
 #include "classifier/distances/euclideanDistance.h"
 #include "classifier/distances/manhattanDistance.h"
 #include "classifier/distances/chebyshevDistance.h"
+#include "clientSocket.h"
 
+typedef void (*scriptFunction) (void);
 
 class Client {
     private:
-        DefaultIO* dio;
+        ClientSocket* clientIO;
+
+        map<int, scriptFunction> getCommands();
 
         void uploadData() const;
         void setKnnSettings() const;
@@ -25,7 +30,7 @@ class Client {
         void exit() const;
 
     public:
-        Client(DefaultIO* dio);
+        Client(ClientSocket* dio);
         void run();
         void close();
 };
