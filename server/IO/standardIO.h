@@ -4,6 +4,12 @@
 #include "defaultIO.h"
 #include <iostream>
 
+/**
+ * @brief The StandardIO class
+ *
+ * This class is Responsible for communicating with the client via the terminal.
+ * It is an IO class, and thus it inherits from the DefaultIO class.
+ */
 class StandardIO : public DefaultIO {
 
     public:
