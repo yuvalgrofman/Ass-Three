@@ -10,55 +10,59 @@ void KnnSettings::execute() {
     Distance* d = getDistance();
 
     dio->write("The current KNN parameters are: K = " + to_string(k) + ", distance metric = " + d->getName());
-    string input = dio->read();
+    string input = "";
 
-    if (input.compare("")) {
-        bool validInput = false;
+    bool validInput = false;
 
-        string strk;
-        string distance;
+    string strk;
+    string distance;
 
-        do {
-            stringstream ss(input);
+    do {
+        input = dio->read();
 
-            getline(ss, strk, ' ');
-            getline(ss, distance);
+        if (!input.compare("NONE")) {
+            dio->write("DONE\n");
+            return;
+        }
 
-            bool strkValid  = false;
-            bool distanceValid = false;
+        stringstream ss(input);
 
-            //checking if strk is valid
-            if (!strk.empty() && std::all_of(strk.begin(), strk.end(), ::isdigit)) {
-                int k = stoi(strk);
-                strkValid = 0 < k && k < 11;
-            }
+        getline(ss, strk, ' ');
+        getline(ss, distance);
 
-            Distance* euc = new EuclideanDistance();
-            Distance* man = new ManhattanDistance();
-            Distance* cheb = new ChebyshevDistance();
+        bool strkValid  = false;
+        bool distanceValid = false;
 
-            distanceValid = !distance.compare(euc->getName())
-                         || !distance.compare(man->getName())
-                         || !distance.compare(cheb->getName());
+        //checking if strk is valid
+        if (!strk.empty() && std::all_of(strk.begin(), strk.end(), ::isdigit)) {
+            int k = stoi(strk);
+            strkValid = 0 < k && k < 11;
+        }
 
-            delete euc;
-            delete man;
-            delete cheb;
+        Distance* euc = new EuclideanDistance();
+        Distance* man = new ManhattanDistance();
+        Distance* cheb = new ChebyshevDistance();
 
-            if (!strkValid && !distanceValid) {
-                dio->write("Invalid value for K and Distance.");
-            } else if (!strkValid) {
-                dio->write("Invalid value for K.");
-            } else if (!distanceValid) {
-                dio->write("Invalid value for Distance.");
-            }
+        distanceValid = !distance.compare(euc->getName())
+                     || !distance.compare(man->getName())
+                     || !distance.compare(cheb->getName());
 
-            validInput = strkValid && distanceValid;
-        } while (!validInput);
+        delete euc;
+        delete man;
+        delete cheb;
 
-        string knnSettingContents = strk + "\n" + distance;
-        writeCSVFile("../server/data/user_" + to_string(userId) + "_config.csv", knnSettingContents);
-    }
+        if (!strkValid && !distanceValid) {
+            dio->write("Invalid value for K and Distance.");
+        } else if (!strkValid) {
+            dio->write("Invalid value for K.");
+        } else if (!distanceValid) {
+            dio->write("Invalid value for Distance.");
+        }
 
+        validInput = strkValid && distanceValid;
+    } while (!validInput);
+
+    string knnSettingContents = strk + "\n" + distance;
+    writeCSVFile("../server/data/user_" + to_string(userId) + "_config.csv", knnSettingContents);
     dio->write("DONE\n");
 }
