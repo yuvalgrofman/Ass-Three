@@ -1,6 +1,7 @@
 #include "client.h"
 
-Client::Client(DefaultIO* dio) : dio(dio) {}
+
+Client::Client(ClientSocket* dio) : clientIO(dio) {}
 
 void Client::run() {
     int op = 1;
@@ -9,6 +10,7 @@ void Client::run() {
         bool validInput = false;
 
         do {
+            cout << clientIO->read();
             string in;
             cin >> in;
 
@@ -18,15 +20,31 @@ void Client::run() {
             }
         } while (!validInput);
 
-        dio->write(to_string(op));
+        clientIO->write(to_string(op));
 
-//        switch (op) {
-//            case 1:
-//                uploadData();
-//                break;
-//            case 2:
-//
-//        }
+        switch (op) {
+            case 1:
+                uploadData();
+                break;
+            case 2:
+                setKnnSettings();
+                break;
+            case 3:
+                classifyData();
+                break;
+            case 4:
+                displayData();
+                break;
+            case 5:
+                downloadData();
+                break;
+            case 6:
+                displayConfusionMatrix();
+                break;
+            case 7:
+                exit();
+                break;
+        }
     }
 }
 
@@ -43,9 +61,9 @@ void Client::uploadData() const {
 
     string fileContents;
     is >> fileContents;
-    dio->write(fileContents);
+    clientIO->write(fileContents);
 
-    cout << dio->read();
+    cout << clientIO->read();
 
     cout << "Please upload your local train csv file." << endl;
     cin >> filePath;
@@ -56,20 +74,28 @@ void Client::uploadData() const {
     }
 
     is >> fileContents;
-    dio->write(fileContents);
+    clientIO->write(fileContents);
 }
 
 void Client::setKnnSettings() const {
-    cout << dio->read();
+    cout << clientIO->read();
 
     string input;
     string serverMessage = "";
 
     do {
-        getline(cin, input);
-        dio->write(input);
+        string strk, distance;
+        cin >> strk;
+        cin >> distance;
 
-        serverMessage = dio->read();
+        input = strk + " " + distance;
+
+        if (!input.compare("")) {
+            input = "NONE";
+        }
+        clientIO->write(input);
+
+        serverMessage = clientIO->read();
 
         if (serverMessage.compare("DONE\n")) {
             cout << serverMessage;
@@ -83,7 +109,7 @@ void Client::displayData() const {
     string str = "garbage value";
 
     while (str.compare("Done.\n")) {
-        str = dio->read();
+        str = clientIO->read();
         cout << str;
     }
 
@@ -99,3 +125,7 @@ void Client::downloadData() const {
 }
 
 void Client::exit() const {}
+
+void Client::close() {
+    clientIO->closeConnection();
+}
