@@ -1,6 +1,5 @@
 #include "standardIO.h"
 
-
 string StandardIO::read() const {
     string str;
     getline(cin, str);
