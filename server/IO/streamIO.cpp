@@ -9,7 +9,7 @@ string StreamIO::read() const {
 }
 
 void StreamIO::write(string str) const {
-    output >> str;
+    output << str;
 }
 
 void StreamIO::close() const {}
