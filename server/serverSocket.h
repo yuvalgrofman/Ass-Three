@@ -9,7 +9,7 @@ class ServerSocket {
         int sock;
 
     public:
-        ServerSocket(int port= 5555);
+        ServerSocket(int port = 5555);
         SocketIO* accept();
         void close();
 
