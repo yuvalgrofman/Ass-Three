@@ -1,4 +1,5 @@
 #include "displayConfusionMatrix.h"
+#include "classifier/classifier.h"
 #include <map>
 
 map<string, int>& DisplayConfusionMatrix::getClassificationOptions() const {
@@ -33,6 +34,12 @@ DisplayConfusionMatrix::DisplayConfusionMatrix(DefaultIO* dio, int userId) : Com
  "display algorithm confusion matrix") {}
 
 void DisplayConfusionMatrix::execute() {
+    string train = "../server/data/user_" + to_string(userId) + "_train.csv";
+    Classifier *c = new Classifier(getK(), train, train);
+    c->predictFileByDist("../server/data/user_" + to_string(userId)
+                         + "_train_prediction.csv", *getDistance());
+    delete c;
+
     map<string, int> &types = getClassificationOptions();
 
     int numTypes = types.size();
@@ -43,22 +50,21 @@ void DisplayConfusionMatrix::execute() {
         }
     }
 
-    string prediction = "../server/data/user_" + to_string(userId) + "_test_prediction.csv";
-    string test = "../server/data/user_" + to_string(userId) + "_test.csv";
+    string prediction = "../server/data/user_" + to_string(userId) + "_train_prediction.csv";
 
     ifstream predictionStream(prediction);
-    ifstream testStream(test);
+    ifstream trainStream(train);
 
-    if (!predictionStream.is_open() || !testStream.is_open()) {
+    if (!predictionStream.is_open() || !trainStream.is_open()) {
         //TODO: print error
     }
 
     string predictionLine;
     string testLine;
     getline(predictionStream, predictionLine);
-    getline(testStream, testLine);
+    getline(trainStream, testLine);
 
-    while (!predictionStream.eof() && !testStream.eof()) {
+    while (!predictionStream.eof() && !trainStream.eof()) {
         testLine = testLine.substr(testLine.find(",") + 1);
 
         int predictionIndex = types.find(predictionLine)->second;
@@ -69,11 +75,11 @@ void DisplayConfusionMatrix::execute() {
 
 
         getline(predictionStream, predictionLine);
-        getline(testStream, testLine);
+        getline(trainStream, testLine);
     }
 
     predictionStream.close();
-    testStream.close();
+    trainStream.close();
 
     for (int row = 0; row < numTypes; row++) {
         int numGussesInRow = 0;
