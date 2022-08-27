@@ -9,7 +9,7 @@ string SocketIO::read() const {
         // connection closed
         return "";
     } else if (read_bytes < 0) {
-        perror("error receiving flower point");
+        perror("error receiving message from client.\n");
     }
 
     string s = string(buffer);
@@ -17,10 +17,13 @@ string SocketIO::read() const {
 }
 
 void SocketIO::write(string str) const {
-    str += END_OF_MESSAGE;
-    int sent_bytes = send(client_sock, str.c_str(), str.length(), 0);
+    string s(str);
+    if (s.length() < BUFFER_SIZE) {
+        s.insert(str.length(), BUFFER_SIZE - str.length(), ';');
+    }
+    int sent_bytes = send(client_sock, s.c_str(), s.length(), 0);
     if (sent_bytes < 0) {
-        perror("error sending flower point");
+        perror("error sending message to client.\n");
     }
 }
 

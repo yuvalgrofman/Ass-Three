@@ -9,7 +9,7 @@
 ClientSocket::ClientSocket(const std::string server_ip, const int port) : server_ip(server_ip), port_num(port),
                           sock(socket(AF_INET, SOCK_STREAM, 0)){
     if (sock < 0) {
-        perror("error creating socket");
+        perror("error creating socket.\n");
     }
 
     struct sockaddr_in sin;
@@ -19,18 +19,19 @@ ClientSocket::ClientSocket(const std::string server_ip, const int port) : server
     sin.sin_port = htons(port_num);
 
     if (connect(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
-        perror("error connecting to server");
+        perror("error connecting to server.\n");
     }
 }
 
 void ClientSocket::write(const std::string str) const {
-    string s = str + END_OF_MESSAGE;
-    char const *data_addr = s.c_str();
-    int data_len = s.length();
-    int sent_bytes = send(sock, data_addr, data_len, 0);
+    string s(str);
 
+    if (s.length() < BUFFER_SIZE) {
+        s.insert(str.length(), BUFFER_SIZE - str.length(), ';');
+    }
+    int sent_bytes = send(sock, s.c_str(), s.length(), 0);
     if (sent_bytes < 0) {
-        perror("error sending data");
+        perror("error sending data to server.\n");
     }
 }
 
