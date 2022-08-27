@@ -12,6 +12,7 @@
 #include "classifier/distances/chebyshevDistance.h"
 #include "server/command/command.h"
 
+
 using namespace std;
 
 /**
@@ -44,6 +45,8 @@ class Command {
          * @param fileContent - the content of the file to write to.
          */
         void writeCSVFile(string filepath, string fileContent) const;
+
+        bool isDataClassified() const;
 
     public:
         /**
