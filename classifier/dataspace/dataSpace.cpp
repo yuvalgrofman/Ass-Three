@@ -27,23 +27,21 @@ string DataSpace::predict(int k, const DataPoint& dataPoint, Distance& distance)
     sorter.sortClassifiableList(arr, numClassifiables);
 
     map<string, int> classificationCount;
+    int maxCount = 0;
+    string maxType = "";
     for (int i = 0; i < k; i++) {
         string type = arr[i]->getType();
-        auto typeCount = classificationCount.find(type);
-        if (typeCount == classificationCount.end()) {
+
+        if (classificationCount.find(type) == classificationCount.end()) {
             classificationCount.insert(pair<string, int>(type, 1));
         } else {
-            classificationCount.at(type) += 1;
+            classificationCount.emplace(type, classificationCount.at(type) + 1);
         }
-    }
 
-    string maxType = "";
-    int maxCount = 0;
-    for (map<string, int>::iterator it = classificationCount.begin();
-                    it != classificationCount.end(); it++) {
-        if (it->second > maxCount) {
-            maxCount = it->second;
-            maxType = it->first;
+        int count = classificationCount.at(type);
+        if (count > maxCount) {
+            maxCount = count;
+            maxType = type;
         }
     }
 
