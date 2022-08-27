@@ -67,7 +67,7 @@ void Client::uploadData() const {
 
     cout << clientIO->read();
 
-    cout << "Please upload your local train csv file." << endl;
+    cout << "Please upload your local test csv file." << endl;
     cin >> filePath;
 
     is.open(filePath);
@@ -126,7 +126,12 @@ void Client::displayData() const {
 }
 
 void Client::displayConfusionMatrix() const {
-    //TODO: implement function
+    string str = "garbage value";
+
+    while (str.compare("Done.\n")) {
+        str = clientIO->read();
+        cout << str << endl;
+    }
 }
 
 void Client::downloadData() const {
@@ -142,7 +147,7 @@ void Client::downloadData() const {
     s << trainData;
     s.close();
 
-    s.open("../client/data/classified_test.csv");\
+    s.open("../client/data/classified_test.csv");
     if (!s.is_open()) {
         //TODO: print error
     }
