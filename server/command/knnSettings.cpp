@@ -9,7 +9,7 @@ void KnnSettings::execute() {
     int k = getK();
     Distance* d = getDistance();
 
-    dio->write("The current KNN parameters are: K = " + to_string(k) + ", distance metric = " + d->getName());
+    dio->write("The current KNN parameters are: K = " + to_string(k) + ", distance metric = " + d->getName() + "\n");
     string input = "";
 
     bool validInput = false;
@@ -22,6 +22,11 @@ void KnnSettings::execute() {
 
         if (!input.compare("NONE")) {
             dio->write("DONE\n");
+            string str = dio->read();
+
+            if (str.compare("DONE\n")) {
+                perror("Problem with connection");
+            }
             return;
         }
 
@@ -35,8 +40,8 @@ void KnnSettings::execute() {
 
         //checking if strk is valid
         if (!strk.empty() && std::all_of(strk.begin(), strk.end(), ::isdigit)) {
-            int k = stoi(strk);
-            strkValid = 0 < k && k < 11;
+            int vk = stoi(strk);
+            strkValid = 0 < vk && vk < 11;
         }
 
         Distance* euc = new EuclideanDistance();
@@ -65,4 +70,9 @@ void KnnSettings::execute() {
     string knnSettingContents = strk + "\n" + distance;
     writeCSVFile("../server/data/user_" + to_string(userId) + "_config.csv", knnSettingContents);
     dio->write("DONE\n");
+    string str = dio->read();
+
+    if (str.compare("DONE\n")) {
+        perror("Problem with connection");
+    }
 }
