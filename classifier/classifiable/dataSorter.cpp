@@ -2,7 +2,7 @@
 
 bool DataSorter::compare(const Classifiable* clsf1, const Classifiable* clsf2) const {
     return distance.getDistance(referencePoint, clsf1->getData()) <=
-           distance.getDistance(referencePoint, clsf1->getData());
+           distance.getDistance(referencePoint, clsf2->getData());
 }
 
 DataSorter::DataSorter(const DataPoint& referencePoint, const Distance& distance) :
