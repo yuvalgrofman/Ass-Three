@@ -12,6 +12,9 @@
 #include "server/command/close.h"
 #include <map>
 #include <algorithm>
+#include <cstdio>
+#include <iostream>
+#include <fstream>
 
 map<int, Command*>* getCommands(DefaultIO* dio, int userId);
 

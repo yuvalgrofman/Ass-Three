@@ -1,5 +1,7 @@
 #include "server.h"
 
+using namespace std;
+
 map<int, Command*>* getCommands(DefaultIO* dio, int userId) {
     map<int, Command*>* map = new ::map<int, Command*>();
 
@@ -45,7 +47,31 @@ void Server::run() {
 }
 
 void Server::close() {
-    //TODO: remove files server created
-    //    if (remove("../server/data/user...")) ...
+
+    string config = "../server/data/user_" + to_string(userId) + "_config.csv";
+    ifstream configStream(config);
+    if (configStream && remove((config).c_str()))
+        perror((config).c_str());
+
+    string trainUnclassified = "../server/data/user_" + to_string(userId) + "_train.csv";
+    ifstream trainUnclassifiedStream(trainUnclassified);
+    if (trainUnclassifiedStream && remove((trainUnclassified).c_str()))
+        perror((trainUnclassified).c_str());
+
+    string testUnclassified = "../server/data/user_" + to_string(userId) + "_test.csv";
+    ifstream testUnclassifiedStream(testUnclassified);
+    if (testUnclassifiedStream && remove((testUnclassified).c_str()))
+        perror((testUnclassified).c_str());
+
+    string trainPredict = "../server/data/user_" + to_string(userId)+ "_train_prediction.csv";
+    ifstream trainPredictStream(testUnclassified);
+    if (trainPredictStream && remove((trainPredict).c_str()))
+        perror((trainPredict).c_str());
+
+    string testPredict = "../server/data/user_" + to_string(userId) + "_test_prediction.csv";
+    ifstream testPredictStream(testUnclassified);
+    if (testPredictStream && remove((testPredict).c_str()))
+        perror((testPredict).c_str());
+
     dio->close();
 }
