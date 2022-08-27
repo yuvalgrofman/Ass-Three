@@ -29,10 +29,11 @@ string DataSpace::predict(int k, const DataPoint& dataPoint, Distance& distance)
     map<string, int> classificationCount;
     for (int i = 0; i < k; i++) {
         string type = arr[i]->getType();
-        if (classificationCount.find(type) == classificationCount.end()) {
+        auto typeCount = classificationCount.find(type);
+        if (typeCount == classificationCount.end()) {
             classificationCount.insert(pair<string, int>(type, 1));
         } else {
-            classificationCount[type]++;
+            classificationCount.at(type) += 1;
         }
     }
 
