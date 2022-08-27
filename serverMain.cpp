@@ -10,4 +10,5 @@ int main() {
     Server* s = new Server(dio, 1);
     s->run();
     s->close();
+    ss->close();
 }
