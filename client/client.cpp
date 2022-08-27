@@ -60,7 +60,9 @@ void Client::uploadData() const {
     }
 
     string fileContents;
-    is >> fileContents;
+    fileContents.assign(std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>());
+    is.close();
+
     clientIO->write(fileContents);
 
     cout << clientIO->read();
@@ -73,8 +75,11 @@ void Client::uploadData() const {
         //TODO: print error
     }
 
-    is >> fileContents;
+    fileContents.assign(std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>());
     clientIO->write(fileContents);
+    is.close();
+
+    clientIO->read();
 }
 
 void Client::setKnnSettings() const {
@@ -107,7 +112,6 @@ void Client::setKnnSettings() const {
             cout << serverMessage;
         }
     } while (serverMessage.compare("DONE\n"));
-    clientIO->write("DONE\n");
 }
 
 void Client::classifyData() const {}
@@ -119,8 +123,6 @@ void Client::displayData() const {
         str = clientIO->read();
         cout << str;
     }
-
-    cout << str;
 }
 
 void Client::displayConfusionMatrix() const {
