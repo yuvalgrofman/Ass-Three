@@ -3,8 +3,7 @@
 DisplayData::DisplayData(DefaultIO *dio, int userId) : Command(dio, userId, "display results") {}
 
 void DisplayData::execute() {
-    ifstream istream("../server/data/user_" + to_string(userId)
-    + "_train_prediction.csv");
+    ifstream istream("../server/data/user_" + to_string(userId) + "_train_prediction.csv");
 
     string word;
     int lineNumber = 1;

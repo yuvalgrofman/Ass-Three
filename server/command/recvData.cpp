@@ -5,9 +5,9 @@ RecvData::RecvData(DefaultIO* dio, int userId) : Command(dio, userId, "upload an
 void RecvData::execute() {
     string trainFileContents = dio->read();
     writeCSVFile("../server/data/user_" + to_string(userId) + "_train.csv", trainFileContents);
-    dio->write("Upload complete.");
+    dio->write("Upload complete.\n");
 
     string testFileContents = dio->read();
     writeCSVFile("../server/data/user_" + to_string(userId) + "_test.csv" ,testFileContents);
-    dio->write("Upload complete.");
+    dio->write("Upload complete.\n");
 }

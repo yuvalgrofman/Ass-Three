@@ -22,11 +22,6 @@ void KnnSettings::execute() {
 
         if (!input.compare("NONE")) {
             dio->write("DONE\n");
-            string str = dio->read();
-
-            if (str.compare("DONE\n")) {
-                perror("Problem with connection");
-            }
             return;
         }
 
@@ -70,9 +65,4 @@ void KnnSettings::execute() {
     string knnSettingContents = strk + "\n" + distance;
     writeCSVFile("../server/data/user_" + to_string(userId) + "_config.csv", knnSettingContents);
     dio->write("DONE\n");
-    string str = dio->read();
-
-    if (str.compare("DONE\n")) {
-        perror("Problem with connection");
-    }
 }
