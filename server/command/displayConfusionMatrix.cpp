@@ -3,7 +3,7 @@
 #include <map>
 
 map<string, int>& DisplayConfusionMatrix::getClassificationOptions() const {
-    ifstream istream = ifstream("../server/data/user_" + to_string(userId) + "_test.csv");
+    ifstream istream = ifstream("../server/data/user_" + to_string(userId) + "_train.csv");
 
     if (!istream.is_open()) {
         //TODO: print error
@@ -65,11 +65,11 @@ void DisplayConfusionMatrix::execute() {
     getline(trainStream, testLine);
 
     while (!predictionStream.eof() && !trainStream.eof()) {
-        testLine = testLine.substr(testLine.find(",") + 1);
+        testLine = testLine.substr(testLine.find_last_of(',') + 1);
 
-        int predictionIndex = types.find(predictionLine)->second;
+        int predictionIndex = types.at(predictionLine);
 
-        int testIndex = types.find(testLine)->second;
+        int testIndex = types.at(testLine);
 
         results[testIndex][predictionIndex]++;
 
@@ -93,19 +93,29 @@ void DisplayConfusionMatrix::execute() {
     }
 
     dio->write("Confusion Matrix:");
-    string lastLine = "\t";
+
+    int maxLengthClassificationString = 0;
     map<string, int>::iterator itr;
     for (itr = types.begin(); itr != types.end(); itr++) {
-        lastLine += itr->first + " ";
+        int length = itr->first.length();
+        if (maxLengthClassificationString < length) {
+            maxLengthClassificationString = length;
+        }
+    }
+
+    for (itr = types.begin(); itr != types.end(); itr++) {
         int row = itr->second;
+
+
         string rowString = itr->first;
+        int length = rowString.length();
+        rowString = rowString.append(maxLengthClassificationString - length, ' ');
+
         for (int col = 0; col < numTypes; col++) {
-            rowString += to_string(results[row][col]) + "\t";
+            rowString += "\t" + to_string(results[row][col]);
         }
         dio->write(rowString);
     }
-
-    dio->write(lastLine);
 
     dio->write("The current KNN parameters are: K = " + to_string(getK())
                + ", distance metric = " + getDistance()->getName());
