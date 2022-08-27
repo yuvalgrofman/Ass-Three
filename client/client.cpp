@@ -84,15 +84,21 @@ void Client::setKnnSettings() const {
     string serverMessage = "";
 
     do {
+        cin.clear();
+        cin.ignore();
         string strk, distance;
-        cin >> strk;
-        cin >> distance;
+        char c = cin.get();
 
-        input = strk + " " + distance;
-
-        if (!input.compare("")) {
+        if (c == '\n') {
             input = "NONE";
+        } else {
+            cin.putback(c);
+            cin >> strk;
+            cin >> distance;
+
+            input = strk + " " + distance;
         }
+
         clientIO->write(input);
 
         serverMessage = clientIO->read();
@@ -101,6 +107,7 @@ void Client::setKnnSettings() const {
             cout << serverMessage;
         }
     } while (serverMessage.compare("DONE\n"));
+    clientIO->write("DONE\n");
 }
 
 void Client::classifyData() const {}
@@ -121,8 +128,8 @@ void Client::displayConfusionMatrix() const {
 }
 
 void Client::downloadData() const {
-    string trainData = dio->read();
-    string testData = dio->read();
+    string trainData = clientIO->read();
+    string testData = clientIO->read();
 
     ofstream s;
 
