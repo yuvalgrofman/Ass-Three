@@ -114,10 +114,17 @@ void Client::setKnnSettings() const {
     } while (serverMessage.compare("DONE\n"));
 }
 
-void Client::classifyData() const {}
+void Client::classifyData() const {
+    cout << clientIO->read();
+}
 
 void Client::displayData() const {
-    string str = "garbage value";
+    string str = clientIO->read();
+
+    if (str.compare("Sending data.\n")) {
+        cout << str;
+        return;
+    }
 
     while (str.compare("Done.\n")) {
         str = clientIO->read();
@@ -135,19 +142,21 @@ void Client::displayConfusionMatrix() const {
 }
 
 void Client::downloadData() const {
-    string trainData = clientIO->read();
+    string str = clientIO->read();
+
+    if (str.compare("Sending data.\n")) {
+        cout << str;
+        return;
+    }
+
+    cout << "Enter path for data-file:\n";
+    string filepath;
+    cin >> filepath;
+
     string testData = clientIO->read();
 
     ofstream s;
-
-    s.open("../client/data/classified_train.csv");
-    if (!s.is_open()) {
-        //TODO: print error
-    }
-    s << trainData;
-    s.close();
-
-    s.open("../client/data/classified_test.csv");
+    s.open(filepath);
     if (!s.is_open()) {
         //TODO: print error
     }

@@ -94,6 +94,15 @@ Distance* Command::getDistance() const {
     return d;
 }
 
+bool Command::isDataClassified() const {
+    string testPredict = "../server/data/user_" + to_string(userId) + "_test_prediction.csv";
+    ifstream testPredictStream(testPredict);
+    if (testPredictStream)
+        return true;
+
+    return false;
+}
+
 string Command::getDescription() const {
     return description;
 }
