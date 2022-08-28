@@ -1,14 +1,13 @@
-#include <iostream>
-#include "server/server.h"
-#include "server/IO/standardIO.h"
-#include "server/serverSocket.h"
+#include "server/serverRunner.h"
 
+/**
+ * The main function for the server.
+ * it creates a SeverRunner object, and runs it.
+ * @return 0 (the default return value of the main function)
+ */
 int main() {
-
-    ServerSocket* ss = new ServerSocket();
-    DefaultIO* dio = ss->accept();
-    Server* s = new Server(dio, 1);
-    s->run();
-    s->close();
-    ss->close();
+    ServerSocket* serverSocket = new ServerSocket();
+    ServerRunner* runner = new ServerRunner(*serverSocket);
+    runner->run();
+    delete runner;
 }
