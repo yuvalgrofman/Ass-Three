@@ -4,6 +4,10 @@
 #include <string>
 using namespace std;
 
+/**
+ * @brief The ClientSocket class
+ * this class is responsible for communicating with the server using sockets.
+ */
 class ClientSocket {
 private:
     const string server_ip;
@@ -11,7 +15,10 @@ private:
     const int sock;
 
 public:
+    //size of the messages sent.
     static const int BUFFER_SIZE = 4096;
+
+    //character which represents the end of a message.
     static const char END_OF_MESSAGE = ';';
 
     /**
