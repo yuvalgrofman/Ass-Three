@@ -7,4 +7,7 @@ int main() {
     Client* c = new Client(dio);
     c->run();
     c->close();
+
+    delete c;
+    delete dio;
 }

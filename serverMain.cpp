@@ -10,4 +10,5 @@ int main() {
     ServerRunner* runner = new ServerRunner(*serverSocket);
     runner->run();
     delete runner;
+    delete serverSocket;
 }
