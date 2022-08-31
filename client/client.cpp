@@ -133,10 +133,10 @@ void Client::displayData() const {
 }
 
 void Client::displayConfusionMatrix() const {
-    int numReads = 3;
+    int numReads = 5;
 
     for (int i = 0; i < numReads; i++) {
-        cout << clientIO->read();
+        cout << clientIO->read() << endl;
     }
 }
 
