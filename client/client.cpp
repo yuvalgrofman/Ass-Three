@@ -133,11 +133,10 @@ void Client::displayData() const {
 }
 
 void Client::displayConfusionMatrix() const {
-    string str = "garbage value";
+    int numReads = 3;
 
-    while (str.compare("Done.\n")) {
-        str = clientIO->read();
-        cout << str << endl;
+    for (int i = 0; i < numReads; i++) {
+        cout << clientIO->read();
     }
 }
 

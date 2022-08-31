@@ -120,6 +120,6 @@ void DisplayConfusionMatrix::execute() {
     dio->write("The current KNN parameters are: K = " + to_string(getK())
                + ", distance metric = " + getDistance()->getName());
 
-    delete &
-types;
+    dio->write("Done\n");
+    delete &types;
 }

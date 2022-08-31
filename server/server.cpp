@@ -63,6 +63,11 @@ void Server::close() {
     if (testUnclassifiedStream && remove((testUnclassified).c_str()))
         perror((testUnclassified).c_str());
 
+    string trainPredict = "../server/data/user_" + to_string(userId) + "_test_prediction.csv";
+    ifstream trainPredictStream(trainPredict);
+    if (trainPredictStream && remove((trainPredict).c_str()))
+        perror((trainPredict).c_str());
+
     string testPredict = "../server/data/user_" + to_string(userId) + "_test_prediction.csv";
     ifstream testPredictStream(testPredict);
     if (testPredictStream && remove((testPredict).c_str()))
