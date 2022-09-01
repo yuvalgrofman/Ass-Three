@@ -41,7 +41,7 @@ string DataSpace::predict(int k, const DataPoint& dataPoint, Distance& distance)
         if (classificationCount.find(type) == classificationCount.end()) {
             classificationCount.insert(pair<string, int>(type, 1));
         } else {
-            classificationCount.emplace(type, classificationCount.at(type) + 1);
+            classificationCount.at(type)++;
         }
 
         int count = classificationCount.at(type);

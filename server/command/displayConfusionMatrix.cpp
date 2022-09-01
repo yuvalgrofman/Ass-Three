@@ -54,28 +54,32 @@ void DisplayConfusionMatrix::execute() {
 
     ifstream predictionStream(prediction);
     ifstream trainStream(train);
+    if (!trainStream.is_open()) {
+        dio->write("Error: train file not found");
+        return;
+    }
 
-    if (!predictionStream.is_open() || !trainStream.is_open()) {
-        //TODO: print error
+    if (!predictionStream.is_open()) {
+        perror("Error: prediction file not found");
     }
 
     string predictionLine;
-    string testLine;
+    string trainLine;
     getline(predictionStream, predictionLine);
-    getline(trainStream, testLine);
+    getline(trainStream, trainLine);
 
     while (!predictionStream.eof() && !trainStream.eof()) {
-        testLine = testLine.substr(testLine.find_last_of(',') + 1);
+        trainLine = trainLine.substr(trainLine.find_last_of(',') + 1);
 
         int predictionIndex = types.at(predictionLine);
 
-        int testIndex = types.at(testLine);
+        int trainIndex = types.at(trainLine);
 
-        results[testIndex][predictionIndex]++;
+        results[trainIndex][predictionIndex]++;
 
 
         getline(predictionStream, predictionLine);
-        getline(trainStream, testLine);
+        getline(trainStream, trainLine);
     }
 
     predictionStream.close();
