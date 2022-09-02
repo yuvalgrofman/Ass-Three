@@ -16,7 +16,22 @@ map<int, Command*>* getCommands(DefaultIO* dio, int userId) {
     return map;
 }
 
-Server::Server(DefaultIO *dio, int userId) : dio(dio), userId(userId) {}
+Server::Server(DefaultIO *dio, int userId) : dio(dio), userId(userId) {
+    string config = "../server/data/user_" + to_string(userId) + "_config.csv";
+    ofstream configStream(config);
+
+    string trainUnclassified = "../server/data/user_" + to_string(userId) + "_train.csv";
+    ofstream trainUnclassifiedStream(trainUnclassified);
+
+    string testUnclassified = "../server/data/user_" + to_string(userId) + "_test.csv";
+    ofstream testUnclassifiedStream(testUnclassified);
+
+    string trainPredict = "../server/data/user_" + to_string(userId) + "_train_prediction.csv";
+    ofstream trainPredictStream(trainPredict);
+
+    string testPredict = "../server/data/user_" + to_string(userId) + "_test_prediction.csv";
+    ofstream testPredictStream(testPredict);
+}
 
 void Server::run() {
     map<int, Command*>* map = getCommands(dio, userId);
