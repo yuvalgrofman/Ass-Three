@@ -133,10 +133,15 @@ void Client::displayData() const {
 }
 
 void Client::displayConfusionMatrix() const {
-    int numReads = 5;
+    string str = clientIO->read();
+    if (std::equal(str.begin(), str.end(), "Sending data.\n")) {
+        int numReads = 5;
 
-    for (int i = 0; i < numReads; i++) {
-        cout << clientIO->read() << endl;
+        for (int i = 0; i < numReads; i++) {
+            cout << clientIO->read() << endl;
+        }
+    } else {
+        cout << str;
     }
 }
 
