@@ -1,4 +1,4 @@
-#include "server/serverRunner.h"
+#include "server/server.h"
 
 /**
  * The main function for the server.
@@ -7,7 +7,7 @@
  */
 int main() {
     ServerSocket* serverSocket = new ServerSocket();
-    ServerRunner* runner = new ServerRunner(*serverSocket);
+    Server* runner = new Server(*serverSocket);
     runner->run();
     delete runner;
     delete serverSocket;

@@ -20,8 +20,8 @@ add_executable(Server
         classifier/distances/manhattanDistance.h
         classifier/classifier.cpp
         classifier/classifier.h
-        server/server.h
-        server/server.cpp
+        server/cli.h
+        server/cli.cpp
         serverMain.cpp
         server/command/command.h
         server/IO/defaultIO.h
@@ -56,8 +56,8 @@ add_executable(Server
         server/IO/streamIO.h
         server/serverSocket.cpp
         server/serverSocket.h
-        server/serverRunner.cpp
-        server/serverRunner.h
+        server/server.cpp
+        server/server.h
         server/serverThread.h
         server/serverThread.cpp
         )

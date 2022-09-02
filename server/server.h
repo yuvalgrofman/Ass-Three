@@ -1,53 +1,35 @@
-#ifndef ASS_TWO_SERVER_H
-#define ASS_TWO_SERVER_H
+#ifndef ASS_THREE_SERVER_H
+#define ASS_THREE_SERVER_H
 
-#include "server/IO/defaultIO.h"
-#include "server/command/command.h"
-#include "server/command/recvData.h"
-#include "server/command/knnSettings.h"
-#include "server/command/classifyData.h"
-#include "server/command/displayData.h"
-#include "server/command/uploadData.h"
-#include "server/command/displayConfusionMatrix.h"
-#include "server/command/close.h"
-#include <map>
-#include <algorithm>
-#include <cstdio>
-#include <iostream>
-#include <fstream>
+#include "serverSocket.h"
+#include "vector"
+#include <dirent.h>
 
-map<int, Command*>* getCommands(DefaultIO* dio, int userId);
+bool dirIsEmpty(string dir);
 
 /**
- * Server is responsible for communication with a single client.
- * Therefore, the server receives in the constructor an IO to communicate
- * with the client, and an integer which represents the userId of the client.
- * The ServerRunner will be responsible for creating new servers in different threads
+ * @brief The Server class
+ *
+ * This class is responsible for creating new servers in different threads
  * with the appropriate instance of DefaultIO and userId.
  */
 class Server {
-
     private:
-        DefaultIO* dio;
-        int userId;
+        int highestId;
+        ServerSocket &serverSocket;
 
-    public:
-        /**
-         * Constructor.
-         * @param dio - the IO to communicate with the client.
-         * @param userId - the userId of the client.
-         */
+        public:
+            /**
+             * Constructor.
+             * @param serverSocket - the server socket to use
+             */
+            Server(ServerSocket &serverSocket);
 
-        Server(DefaultIO* dio, int userId);
-        /**
-         * Runs the server.
-         */
-        void run();
-
-        /**
-         * Closes the server.
-         */
-        void close();
+            /**
+             * Runs the server runner.
+             */
+            void run();
 };
 
-#endif //ASS_TWO_SERVER_H
+
+#endif //ASS_THREE_SERVER_H

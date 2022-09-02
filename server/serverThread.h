@@ -6,7 +6,7 @@
  * the method each thread will run.
  * it will run the server of a specific user.
  * @param arg - the argument sent to the thread,
- * it should be a pointer to a Server object.
+ * it should be a pointer to a CLI object.
  */
 void *serverThread(void *arg);
 
