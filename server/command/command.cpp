@@ -97,8 +97,9 @@ Distance* Command::getDistance() const {
 bool Command::isDataClassified() const {
     string testPredict = "../server/data/user_" + to_string(userId) + "_test_prediction.csv";
     ifstream testPredictStream(testPredict);
+    char v = testPredictStream.peek();
 
-    return !testPredictStream.peek() == std::ifstream::traits_type::eof();
+    return !(testPredictStream.peek() == std::ifstream::traits_type::eof());
 }
 
 string Command::getDescription() const {

@@ -8,14 +8,14 @@ void ClassifyData::execute() {
     string train = "../server/data/user_" + to_string(userId) + "_train.csv";
     bool trainIsEmpty = false;
     ifstream trainContentStream(train);
-    trainIsEmpty = trainContentStream.peek() == std::ifstream::traits_type ::eof();
+    trainIsEmpty = trainContentStream.peek() == std::ifstream::traits_type::eof();
 
     string test = "../server/data/user_" + to_string(userId) + "_test.csv";
     bool testIsEmpty = false;
     ifstream testContentStream(train);
-    testIsEmpty = testContentStream.peek() == std::ifstream::traits_type ::eof();
+    testIsEmpty = testContentStream.peek() == std::ifstream::traits_type::eof();
 
-    if (!trainIsEmpty || !testIsEmpty) {
+    if (trainIsEmpty || testIsEmpty) {
         string s = "train or test files are empty.\nIn order to upload them press 1.\n";
         dio->write(s);
 
