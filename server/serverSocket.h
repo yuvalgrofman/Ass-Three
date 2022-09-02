@@ -14,8 +14,16 @@ class ServerSocket {
         int port;
         int sock;
 
+        int maxFds;
+
+        fd_set fdSet;
+        struct timeval timeval;
+
     public:
+        static const int TIMEOUT_SECONDS = 15;
+
         ServerSocket(int port = 5555);
+        bool hasTimedOut();
         SocketIO* accept();
         void close();
 

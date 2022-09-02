@@ -10,6 +10,11 @@ ServerSocket::ServerSocket(int port) {
         perror("error creating socket");
     }
 
+    int enableBind = 1;
+    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &enableBind, sizeof(int)) < 0){
+        perror("setsockopt(SO_REUSEADDR) failed");
+    }
+
     struct sockaddr_in sin;
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
@@ -23,6 +28,18 @@ ServerSocket::ServerSocket(int port) {
     if (listen(sock, 5) < 0) {
         perror("error listening to a socket");
     }
+
+    this->maxFds = sock;
+
+    FD_ZERO(&fdSet);
+    FD_SET(sock, &fdSet);
+
+    this->timeval.tv_sec = TIMEOUT_SECONDS;
+    this->timeval.tv_usec = 0;
+}
+
+bool ServerSocket::hasTimedOut() {
+    return select(maxFds + 1, &fdSet, NULL, NULL, &timeval) == 0;
 }
 
 SocketIO* ServerSocket::accept() {
@@ -35,6 +52,8 @@ SocketIO* ServerSocket::accept() {
         perror("error accepting client");
     }
 
+    this->timeval.tv_sec = TIMEOUT_SECONDS;
+    this->timeval.tv_usec = 0;
     return new SocketIO(client_sock);
 }
 
