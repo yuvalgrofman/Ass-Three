@@ -3,6 +3,9 @@
 
 #include "serverSocket.h"
 #include "vector"
+#include <dirent.h>
+
+bool dirIsEmpty(string dir);
 
 /**
  * @brief The ServerRunner class
