@@ -4,7 +4,13 @@
 #include "serverSocket.h"
 #include "vector"
 #include <dirent.h>
+#include <string>
 
+/**
+ * Checks if a directory is empty
+ * @param dir path to directory
+ * @return true if empty, false otherwise
+ */
 bool dirIsEmpty(string dir);
 
 /**
@@ -18,17 +24,21 @@ class Server {
         int highestId;
         ServerSocket &serverSocket;
 
-        public:
-            /**
-             * Constructor.
-             * @param serverSocket - the server socket to use
-             */
-            Server(ServerSocket &serverSocket);
 
-            /**
-             * Runs the server runner.
-             */
-            void run();
+
+    public:
+        static const string DATA_DIR;
+
+        /**
+         * Constructor.
+         * @param serverSocket - the server socket to use
+         */
+        Server(ServerSocket &serverSocket);
+
+        /**
+         * Runs the server runner.
+         */
+        void run();
 };
 
 

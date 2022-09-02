@@ -2,6 +2,8 @@
 #include "serverThread.h"
 #include "cli.h"
 
+const string Server::DATA_DIR = "../server/data";
+
 bool dirIsEmpty(string dirname) {
     int n = 0;
     struct dirent *d;
@@ -36,7 +38,7 @@ void Server::run() {
 
                 pthread_create(&thread_id, NULL, serverThread, (void *)server);
             } else {
-                if (dirIsEmpty("../server/data")) {
+                if (dirIsEmpty(DATA_DIR)) {
                     return;
                 }
             }
