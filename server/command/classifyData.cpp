@@ -6,18 +6,17 @@ ClassifyData::ClassifyData(DefaultIO* dio, int userId) : Command(dio, userId, "c
 
 void ClassifyData::execute() {
     string train = "../server/data/user_" + to_string(userId) + "_train.csv";
-    bool trainExists = false;
-
+    bool trainIsEmpty = false;
     ifstream trainContentStream(train);
-    trainExists = trainContentStream ? true : false;
+    trainIsEmpty = trainContentStream.peek() == std::ifstream::traits_type ::eof();
+
     string test = "../server/data/user_" + to_string(userId) + "_test.csv";
-
-    bool testExists = false;
+    bool testIsEmpty = false;
     ifstream testContentStream(train);
-    testExists = testContentStream ? true : false;
+    testIsEmpty = testContentStream.peek() == std::ifstream::traits_type ::eof();
 
-    if (!trainExists || !testExists) {
-        string s = "train of test files don't exist.\nIn order to upload them press 1.\n";
+    if (!trainIsEmpty || !testIsEmpty) {
+        string s = "train or test files are empty.\nIn order to upload them press 1.\n";
         dio->write(s);
 
     } else {

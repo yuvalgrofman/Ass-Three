@@ -31,9 +31,16 @@ map<string, int>& DisplayConfusionMatrix::getClassificationOptions() const {
 }
 
 DisplayConfusionMatrix::DisplayConfusionMatrix(DefaultIO* dio, int userId) : Command(dio, userId,
- "display algorithm confusion matrix") {}
+    "display algorithm confusion matrix") {}
 
 void DisplayConfusionMatrix::execute() {
+    if (!isDataClassified()) {
+        dio->write("The data hasn't been classified.\nTo classify the data press 3.\n");
+        return;
+    } else {
+        dio->write("Sending data.\n");
+    }
+
     string train = "../server/data/user_" + to_string(userId) + "_train.csv";
     Classifier *c = new Classifier(getK(), train, train);
     c->predictFileByDist("../server/data/user_" + to_string(userId)
@@ -54,14 +61,6 @@ void DisplayConfusionMatrix::execute() {
 
     ifstream predictionStream(prediction);
     ifstream trainStream(train);
-    if (!trainStream.is_open()) {
-        dio->write("Error: train file not found");
-        return;
-    }
-
-    if (!predictionStream.is_open()) {
-        perror("Error: prediction file not found");
-    }
 
     string predictionLine;
     string trainLine;
