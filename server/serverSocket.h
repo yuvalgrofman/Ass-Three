@@ -20,7 +20,7 @@ class ServerSocket {
         struct timeval timeval;
 
     public:
-        static const int TIMEOUT_SECONDS = 15;
+        static const int TIMEOUT_SECONDS = 30;
 
         ServerSocket(int port = 5555);
         bool hasTimedOut();
