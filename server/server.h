@@ -14,6 +14,13 @@
 bool dirIsEmpty(string dir);
 
 /**
+ * Checks if a directory exists
+ * @param dir path to directory
+ * @return true if exists, false otherwise
+ */
+bool dirExists(string dir);
+
+/**
  * @brief The Server class
  *
  * This class is responsible for creating new servers in different threads
@@ -23,8 +30,6 @@ class Server {
     private:
         int highestId;
         ServerSocket &serverSocket;
-
-
 
     public:
         static const string DATA_DIR;

@@ -1,6 +1,9 @@
 #include "server.h"
 #include "serverThread.h"
 #include "cli.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 const string Server::DATA_DIR = "../server/data";
 
@@ -22,12 +25,21 @@ bool dirIsEmpty(string dirname) {
         return false;
 }
 
+bool dirExists(string dirname) {
+    DIR *dir = opendir(dirname.c_str());
+    return dir != NULL;
+}
+
 
 Server::Server(ServerSocket &serverSocket) : serverSocket(serverSocket) {
     highestId = 0;
 }
 
 void Server::run() {
+    if (!dirExists(DATA_DIR)) {
+        mkdir(DATA_DIR.c_str(), 0777);
+    }
+
     while (true) {
         try {
             if (!serverSocket.hasTimedOut()) {
