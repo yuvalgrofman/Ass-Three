@@ -40,7 +40,8 @@ void DisplayConfusionMatrix::execute() {
     trainIsEmpty = trainContentStream.peek() == std::ifstream::traits_type::eof();
 
     if (trainIsEmpty) {
-        string s = "train file is empty.\nIn order to upload it choose option 1 from the option screen.\n";
+        string s = "train file is empty.\nIn order to upload it "
+                   "choose option 1 from the options screen.\n";
         dio->write(s);
     } else {
         dio->write("Sending data.\n");

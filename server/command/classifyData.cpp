@@ -16,7 +16,8 @@ void ClassifyData::execute() {
     testIsEmpty = testContentStream.peek() == std::ifstream::traits_type::eof();
 
     if (trainIsEmpty || testIsEmpty) {
-        string s = "train or test files are empty.\nIn order to upload them press 1.\n";
+        string s = "train or test files are empty.\nIn order to upload "
+                   "them choose option 1 from the options screen.\n";
         dio->write(s);
 
     } else {

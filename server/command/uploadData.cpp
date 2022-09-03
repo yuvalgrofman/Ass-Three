@@ -4,7 +4,8 @@ UploadData::UploadData(DefaultIO *dio, int userId) : Command(dio, userId, "downl
 
 void UploadData::execute() {
     if (!isDataClassified()) {
-        dio->write("The data hasn't been classified.\nTo classify the data press 3.\n");
+        dio->write("The data hasn't been classified.\nTo classify the data "
+                   "choose option 3 from the options screen.\n");
         return;
     } else {
         dio->write("Sending data.\n");
