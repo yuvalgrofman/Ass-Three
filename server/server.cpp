@@ -49,6 +49,7 @@ void Server::run() {
                 CLI *server = new CLI(socketIO, highestId);
 
                 pthread_create(&thread_id, NULL, serverThread, (void *)server);
+                pthread_detach(thread_id);
             } else {
                 if (dirIsEmpty(DATA_DIR)) {
                     rmdir(DATA_DIR.c_str());
