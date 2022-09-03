@@ -14,13 +14,16 @@ void Client::run() {
             string in;
             cin >> in;
 
-            if (!in.empty() && std::all_of(in.begin(), in.end(), ::isdigit)) {
-                op = stoi(in);
-                validInput = 0 < op && op < 8;
+            if (!in.empty()) {
+                try {
+                    op = stoi(in);
+                } catch (invalid_argument& e) {
+                    op = -1; // invalid input, to make the loop repeat.
+                }
+                validInput = (0 < op && op < 8);
+                clientIO->write(to_string(op));
             }
         } while (!validInput);
-
-        clientIO->write(to_string(op));
 
         switch (op) {
             case 1:
