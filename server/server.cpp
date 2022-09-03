@@ -51,12 +51,12 @@ void Server::run() {
                 pthread_create(&thread_id, NULL, serverThread, (void *)server);
             } else {
                 if (dirIsEmpty(DATA_DIR)) {
+                    rmdir(DATA_DIR.c_str());
                     return;
                 }
             }
         } catch (...) {
             break;
         }
-
     }
 }
