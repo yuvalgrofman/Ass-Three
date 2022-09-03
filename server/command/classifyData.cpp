@@ -20,8 +20,6 @@ void ClassifyData::execute() {
         dio->write(s);
 
     } else {
-        dio->write("Classifying data.\n");
-
         Classifier *c = new Classifier(getK(), train, test);
 
         Distance *d = getDistance();
@@ -30,5 +28,7 @@ void ClassifyData::execute() {
         delete d;
 
         delete c;
+
+        dio->write("Classifying data complete.\n");
     }
 }
