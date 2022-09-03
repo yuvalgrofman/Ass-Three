@@ -145,13 +145,19 @@ void Client::displayData() const {
 
     if (str.compare("Sending data.\n")) {
         cout << str;
-        return;
+    } else {
+        while (str.compare("Done.\n")) {
+            str = clientIO->read();
+            cout << str;
+        }
     }
 
-    while (str.compare("Done.\n")) {
-        str = clientIO->read();
-        cout << str;
-    }
+    char c;
+    do {
+        cin.clear();
+        cin.ignore();
+        c = cin.get();
+    } while (c != '\n');
 }
 
 void Client::displayConfusionMatrix() const {
@@ -165,6 +171,13 @@ void Client::displayConfusionMatrix() const {
     } else {
         cout << str;
     }
+
+    char c;
+    do {
+        cin.clear();
+        cin.ignore();
+        c = cin.get();
+    } while (c != '\n');
 }
 
 void Client::downloadData() const {
@@ -172,6 +185,14 @@ void Client::downloadData() const {
 
     if (str.compare("Sending data.\n")) {
         cout << str;
+
+        char c;
+        do {
+            cin.clear();
+            cin.ignore();
+            c = cin.get();
+        } while (c != '\n');
+
         return;
     }
 
