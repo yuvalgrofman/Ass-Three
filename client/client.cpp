@@ -52,12 +52,21 @@ void Client::run() {
 }
 
 void Client::uploadData() const {
-    string filePath;
-    cout << "Please upload your local train csv file." << endl;
-    cin >> filePath;
-
     ifstream is;
-    is.open(filePath);
+    string filePath;
+    while (true) {
+        cout << "Please upload your local train csv file." << endl;
+        cin >> filePath;
+        is.open(filePath);
+
+        if (!is) {
+            cout << "File not found. ";
+            is.close();
+        } else {
+            break;
+        }
+    }
+
     if (!is.is_open()) {
         //TODO: print error
     }
@@ -70,8 +79,18 @@ void Client::uploadData() const {
 
     cout << clientIO->read();
 
-    cout << "Please upload your local test csv file." << endl;
-    cin >> filePath;
+    while (true) {
+        cout << "Please upload your local test csv file." << endl;
+        cin >> filePath;
+        is.open(filePath);
+
+        if (!is) {
+            cout << "File not found. ";
+            is.close();
+        } else {
+            break;
+        }
+    }
 
     is.open(filePath);
     if (!is.is_open()) {
