@@ -30,6 +30,7 @@ class CLI {
     private:
         DefaultIO* dio;
         int userId;
+        const int NUM_OF_COMMANDS = 7;
 
     public:
         /**
@@ -48,6 +49,8 @@ class CLI {
          * Closes the server.
          */
         void close();
+
+        ~CLI();
 };
 
 #endif //ASS_TWO_SERVER_H

@@ -53,12 +53,17 @@ void CLI::run() {
 
             if (!in.empty() && std::all_of(in.begin(), in.end(), ::isdigit)) {
                 op = stoi(in);
-                validInput = 0 < op && op < 8;
+                validInput = (0 < op && op <= NUM_OF_COMMANDS);
             }
         } while (!validInput);
 
         map->at(op)->execute();
     }
+
+    for(int i = 1; i <= NUM_OF_COMMANDS; i++) {
+        delete map->at(i);
+    }
+    delete map;
 }
 
 void CLI::close() {
@@ -89,4 +94,8 @@ void CLI::close() {
         perror((testPredict).c_str());
 
     dio->close();
+}
+
+CLI::~CLI() {
+    delete dio;
 }

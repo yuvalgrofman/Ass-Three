@@ -43,8 +43,11 @@ void DisplayConfusionMatrix::execute() {
 
     string train = "../server/data/user_" + to_string(userId) + "_train.csv";
     Classifier *c = new Classifier(getK(), train, train);
+
+    Distance *d = getDistance();
     c->predictFileByDist("../server/data/user_" + to_string(userId)
-                         + "_train_prediction.csv", *getDistance());
+                         + "_train_prediction.csv", *d);
+    delete d;
     delete c;
 
     map<string, int> &types = getClassificationOptions();
@@ -120,8 +123,10 @@ void DisplayConfusionMatrix::execute() {
         dio->write(rowString);
     }
 
+    Distance *dist = getDistance();
     dio->write("The current KNN parameters are: K = " + to_string(getK())
-               + ", distance metric = " + getDistance()->getName());
-
+               + ", distance metric = " + dist->getName());
+    delete dist;
+    
     delete &types;
 }

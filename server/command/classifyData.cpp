@@ -24,8 +24,10 @@ void ClassifyData::execute() {
 
         Classifier *c = new Classifier(getK(), train, test);
 
+        Distance *d = getDistance();
         c->predictFileByDist("../server/data/user_" + to_string(userId)
-                             + "_test_prediction.csv", *getDistance());
+                             + "_test_prediction.csv", *d);
+        delete d;
 
         delete c;
     }

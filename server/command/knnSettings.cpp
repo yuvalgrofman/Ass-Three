@@ -10,6 +10,9 @@ void KnnSettings::execute() {
     Distance* d = getDistance();
 
     dio->write("The current KNN parameters are: K = " + to_string(k) + ", distance metric = " + d->getName() + "\n");
+
+    delete d;
+
     string input = "";
 
     bool validInput = false;
