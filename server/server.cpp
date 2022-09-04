@@ -22,7 +22,9 @@ bool dirIsEmpty(string dirname) {
 
 bool dirExists(string dirname) {
     DIR *dir = opendir(dirname.c_str());
-    return dir != NULL;
+    bool flag = dir != NULL;
+    free(dir);
+    return flag;
 }
 
 
