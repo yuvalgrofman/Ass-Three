@@ -36,13 +36,15 @@ void ClientSocket::write(const std::string str) const {
 }
 
 string ClientSocket::read() const {
-    char buffer[BUFFER_SIZE];
+    char buffer[BUFFER_SIZE] = {0};
     int read_bytes = recv(sock, buffer, BUFFER_SIZE, 0);
     if (read_bytes == 0) {
         throw "connection is closed";
     } else if (read_bytes < 0) {
         throw "error";
     }
+
+    buffer[BUFFER_SIZE - 1] = '\0';
     string s = string(buffer);
     return s.substr(0, s.find(END_OF_MESSAGE));
 }
