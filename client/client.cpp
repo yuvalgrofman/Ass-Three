@@ -1,5 +1,18 @@
 #include "client.h"
 
+void writeDataToFile(string* filepath, string* fileContents) {
+    ofstream s;
+    s.open(*filepath);
+    if (!s.is_open()) {
+        //TODO: print error
+    }
+
+    s << *fileContents;
+    s.close();
+
+    delete filepath;
+    delete fileContents;
+}
 
 Client::Client(ClientSocket* dio) : clientIO(dio) {}
 
@@ -183,7 +196,8 @@ void Client::displayConfusionMatrix() const {
 void Client::downloadData() const {
     string str = clientIO->read();
 
-    if (str.compare("Sending data.\n")) {
+    if (std::equal(str.begin(), str.end(), "The data hasn't been classified.\nTo classify the data "
+       "choose option 3 from the options screen.\n")) {
         cout << str;
 
         char c;
@@ -200,15 +214,8 @@ void Client::downloadData() const {
     string filepath;
     cin >> filepath;
 
-    string testData = clientIO->read();
-
-    ofstream s;
-    s.open(filepath);
-    if (!s.is_open()) {
-        //TODO: print error
-    }
-    s << testData;
-    s.close();
+    std::thread thread(writeDataToFile, new string(filepath), new string(clientIO->read()));
+    thread.detach();
 }
 
 void Client::exit() const {}

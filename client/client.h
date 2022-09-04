@@ -12,6 +12,15 @@
 #include "classifier/distances/manhattanDistance.h"
 #include "classifier/distances/chebyshevDistance.h"
 #include "clientSocket.h"
+#include <thread>
+
+/**
+ * Writes the string given into a file.
+ * @param filepath filepath of given file. (deletes the string)
+ * @param fileContents content of file
+ * deletes both string*.
+ */
+void writeDataToFile(string* filepath, string* fileContents);
 
 /**
  * @brief The Client class

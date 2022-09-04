@@ -5,6 +5,11 @@
 #include "vector"
 #include <dirent.h>
 #include <string>
+#include "serverThread.h"
+#include "cli.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 /**
  * Checks if a directory is empty

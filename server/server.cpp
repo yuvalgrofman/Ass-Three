@@ -1,9 +1,4 @@
 #include "server.h"
-#include "serverThread.h"
-#include "cli.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 const string Server::DATA_DIR = "../server/data";
 
