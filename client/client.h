@@ -14,11 +14,6 @@
 #include "clientSocket.h"
 #include <thread>
 
-struct thread_args {
-    string filepath;
-    ClientSocket* clientIO;
-};
-
 /**
  * Writes the string given into a file.
  * @param filepath filepath of given file. (deletes the string)
