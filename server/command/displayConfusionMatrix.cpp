@@ -127,7 +127,7 @@ void DisplayConfusionMatrix::execute() {
             dio->write(rowString);
         }
 
-        remove((prediction).c_str());
+        writeCSVFile(prediction, "");
 
         Distance *dist = getDistance();
         dio->write("The current KNN parameters are: K = " + to_string(getK())
