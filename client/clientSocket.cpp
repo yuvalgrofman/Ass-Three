@@ -39,9 +39,11 @@ string ClientSocket::read() const {
     char buffer[BUFFER_SIZE] = {0};
     int read_bytes = recv(sock, buffer, BUFFER_SIZE, 0);
     if (read_bytes == 0) {
-        throw "connection is closed";
+        perror("connection is closed\n");
+        exit(1);
     } else if (read_bytes < 0) {
-        throw "error";
+        perror("error\n");
+        exit(1);
     }
 
     buffer[BUFFER_SIZE - 1] = '\0';
