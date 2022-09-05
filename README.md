@@ -228,6 +228,15 @@ The output of each client is dependent on the user's input, and requests.
 and is dependent on the options the user chooses to run, from the options menu.
 
 
+# Additional Notes
+- If a client classifies a file that it uploaded, and then changed the configuration of the KNN algorithm, 
+  then the results of the classification will be still based on the new configuration of the KNN algorithm, until the client classifies it again.
+
+- If a client classifies a file that it uploaded, and  then uploaded a new file then the results of the classification based on the old file will be deleted from the server. Although offcurse if the client already downloaded the results of the classification, then the results will still be saved on the client's machine.
+
+- To run the confusion matrix option, the client doesn't have to classify the data beforehand.
+
+- Some of the options that the client can run, need the user to input an "ENTER" key-press, in order to continue the program. So if the options menu doesn't appear, after an option has been run, then the user must press the "ENTER" key.
 
 ## Authors
 
