@@ -223,7 +223,7 @@ void Client::downloadData() const {
     s.close();
 
     while(!is_open) {
-        cout << "The path Entered was not valid." << endl;
+        cout << "The path you have entered was not valid." << endl;
         cout << "Please enter a valid path for data-file:\n";
 
         cin >> filepath;
