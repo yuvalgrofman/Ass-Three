@@ -4,11 +4,11 @@ void writeDataToFile(string* filepath, string* fileContents) {
     ofstream s;
     s.open(*filepath);
     if (!s.is_open()) {
-        //TODO: print error
+        cout << "Error opening file : " + *filepath << endl;
+    } else {
+        s << *fileContents;
+        s.close();
     }
-
-    s << *fileContents;
-    s.close();
 
     delete filepath;
     delete fileContents;
@@ -81,7 +81,7 @@ void Client::uploadData() const {
     }
 
     if (!is.is_open()) {
-        //TODO: print error
+        perror("Error opening file");
     }
 
     string fileContents;
@@ -107,7 +107,7 @@ void Client::uploadData() const {
 
     is.open(filePath);
     if (!is.is_open()) {
-        //TODO: print error
+        perror("Error opening file");
     }
 
     fileContents.assign(std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>());
@@ -176,10 +176,13 @@ void Client::displayData() const {
 void Client::displayConfusionMatrix() const {
     string str = clientIO->read();
     if (std::equal(str.begin(), str.end(), "Sending data.\n")) {
-        int numReads = 5;
-
-        for (int i = 0; i < numReads; i++) {
-            cout << clientIO->read() << endl;
+        while(true) {
+            string readString = clientIO->read();
+            if (readString.compare("Not sending data.")) {
+                cout << readString << endl;
+            } else {
+                break;
+            }
         }
     } else {
         cout << str;
@@ -213,6 +216,23 @@ void Client::downloadData() const {
     cout << "Enter path for data-file:\n";
     string filepath;
     cin >> filepath;
+
+    ofstream s;
+    s.open(filepath);
+    bool is_open = s.is_open();
+    s.close();
+
+    while(!is_open) {
+        cout << "The path Entered was not valid." << endl;
+        cout << "Please enter a valid path for data-file:\n";
+
+        cin >> filepath;
+
+        ofstream st;
+        st.open(filepath);
+        is_open = st.is_open();
+        st.close();
+    }
 
     std::thread thread(writeDataToFile, new string(filepath), new string(clientIO->read()));
     thread.detach();

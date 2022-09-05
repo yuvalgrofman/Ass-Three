@@ -104,14 +104,24 @@ void DisplayConfusionMatrix::execute() {
 
         dio->write("Confusion Matrix:");
 
+
+        string classificationOptionsStr = "";
+
+
         int maxLengthClassificationString = 0;
         map<string, int>::iterator itr;
         for (itr = types.begin(); itr != types.end(); itr++) {
+            classificationOptionsStr +=  itr->first + " ";
             int length = itr->first.length();
             if (maxLengthClassificationString < length) {
                 maxLengthClassificationString = length;
             }
         }
+
+        string firstLine = "";
+        firstLine = firstLine.append(maxLengthClassificationString, ' ');
+        firstLine += classificationOptionsStr;
+        dio->write(firstLine);
 
         for (itr = types.begin(); itr != types.end(); itr++) {
             int row = itr->second;
@@ -127,12 +137,14 @@ void DisplayConfusionMatrix::execute() {
             dio->write(rowString);
         }
 
-        writeCSVFile(prediction, "");
-
         Distance *dist = getDistance();
         dio->write("The current KNN parameters are: K = " + to_string(getK())
                    + ", distance metric = " + dist->getName());
         delete dist;
+
+        dio->write("Not sending data.");
+
+        writeCSVFile(prediction, "");
 
         delete &types;
     }
