@@ -204,7 +204,7 @@ This part of the README.md is dedicated to the client.
 Executing the client is similar to executing the server.
 Note that if the server has already been made using the build, cmake and make commands
 then the client can immediately be run. 
-This can be done by navigating to the dir Ass-Three and executing the command `Client` in the terminal.
+This can be done by navigating to the dir Ass-Three/build and executing the command `./Client` in the terminal.
 
 Otherwise, assuming the project has been installed navigate to the project file, most likely called Ass-Three.
 Then execute the following commands:
