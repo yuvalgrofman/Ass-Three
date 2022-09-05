@@ -194,6 +194,12 @@ In order to change this behavior, the ip address in the client must be changed. 
 Secondly, This algorithm automatically sets the k value used in the KNN algorithm to 5
 and the distance metric used is the euclidean distance.
 
+Thirdly, there exists default train and test files called classified.csv and Unclassified.csv accordingly.
+These files are placed in `client/data` directory, the relative path from the build file is `../client/data`.
+
+Finally, if a client tries to connect to the server after the timeout length passed and the server isn't accepting more clients, 
+the client will just wait until the server closes and then will print the error message `connection refused`.
+
 # The Client
 
 As mentioned above, the project contains a server and a client.
