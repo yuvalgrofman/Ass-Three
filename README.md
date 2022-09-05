@@ -89,24 +89,31 @@ The client can also later send a new train and test files to the server, but not
 Please note, that these **csv file must end with a blank line**. Otherwise, the program will not operate properly.
 
 
-## Communicating with the clients
+## Communication between clients and server
 After a client is accepted, the server sends the client a list of 7 things it could run:
 
 1. upload train and test files.
 
    The client sends the server the train and test csv files, and the server saves them to its data directory.
+   if the client already sent a train and test files, the server will delete them and replace them with the new ones.
+   In addition, if the client sends invalid test or train files the server's behavior is undefined.
+   (Information about the format of a valid train and test files can be found in the previous section).
+
 
 2. change the settings of the KNN algorithm (k value and distance metric).
 
    The server sends the client the current settings of the KNN algorithm, and the client can change them and send them back to the server. The settings for each client are stored in a config file, in the server's data directory.
 
+
 3. classify the test data.
 
    the server runs the KNN algorithm on the test data points, based on the train data points, and the settings of the KNN algorithm. It saves the results to a file in the server's data directory.
 
+
 4. display the results of the last classification.
 
    The server sends the prediction results of the classification process performed in option 3. If option 3 wasn't performed before this, it will tell the client that it must perform option 3 first. otherwise, it will send the results of the last classification, and the client will display them on the screen.
+
 
 5. download the results of the last classification. 1. display confusion matrix.
 
@@ -114,22 +121,34 @@ After a client is accepted, the server sends the client a list of 7 things it co
 
    This option will be run on different threads, and so the client will be able to run other options while this option is running.
 
+
 6. display confusion matrix.
 
    The server will classify the train data points, based on the train data points, and the settings of the KNN algorithm. It will then compare its prediction with the real classification of the train data, calculate the confusion matrix, and send it to the client. Then the client will display the confusion matrix on the screen.
+
 
 7. exit.
 
    The connection between the client and the server will be closed, and the server thread that deals with the client will be terminated.
 
-# The Server
+Additionally, if the client or server are terminated artificially by the user, then errors might occur and the programs functionality is not defined.
 
-## Running The Server
-   
-# GROUPMAN PLZ ADD RUNNING INSTRUCTIONS FOR THE SERVER
+# The Server
 
 As mentioned above, the project contains a server and a client.
 This part of the README.md is dedicated to the server.
+
+## Running The Server
+
+Firstly, assuming the project has been installed navigate to the project file, most likely called Ass-Three.
+Then execute the following commands:
+
+        mkdir -p build && cd build
+        cmake ..
+        make -j
+        ./Server
+
+After executing the mentioned commands, the server will be run and wait for clients.
 
 ## Output
 
@@ -143,15 +162,10 @@ and so helps create an output for the clients.
 The server is responsible for receiving new clients. 
 It deals with each client in a different thread, and so can deal with multiple clients at the same time.
 
-The server stops accepting clients after a certain amount of time has passed from the last accepted user.
-
-# GROUPMAN PLZ FIX ABOVE LINE ABOUT TIMEOUT
+The server stops accepting clients 60 seconds after the last client connects to the server.
 
 **Please note that if a client tries to connect to the server, but the server is not running or stopped accepting clients, 
 then the client will not be able to connect, and an exception would be displayed on the screen.**
-
-
-
 
 ### Classifier algorithm
 The classifier algorithm works, by reading the classified data points from the train file given by the user, 
@@ -175,12 +189,10 @@ is written in capital letters.**
 ## Additional Info
 
 Firstly, the algorithm currently supports running the client and server on the same machine.
-In order to change this behavior, the ip address in the client must be changed.
+In order to change this behavior, the ip address in the client must be changed. Moreover, the port used by the server is 5555, the client also uses the same port number.
 
-Secondly, This algorithm automatically sets the k value used in the KNN algorithm to 3
+Secondly, This algorithm automatically sets the k value used in the KNN algorithm to 5
 and the distance metric used is the euclidean distance.
-
-
 
 # The Client
 
@@ -189,8 +201,20 @@ This part of the README.md is dedicated to the client.
 
 ## Running A Client
 
-# GROUPMAN PLZ ADD RUNNING INSTRUCTIONS FOR THE Client
+Executing the client is similar to executing the server.
+Note that if the server has already been made using the build, cmake and make commands
+then the client can immediately be run. 
+This can be done by navigating to the dir Ass-Three and executing the command `Client` in the terminal.
 
+Otherwise, assuming the project has been installed navigate to the project file, most likely called Ass-Three.
+Then execute the following commands:
+
+        mkdir -p build && cd build
+        cmake ..
+        make -j
+        ./Client
+
+This will run the client, and it will connect to the server.
 
 ## Output
 
