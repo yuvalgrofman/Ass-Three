@@ -48,7 +48,7 @@ To install CMake, follow the instructions [here](https://cmake.org/install/). In
 
 Firstly, clone the project from the GitHub repository:
 
-        git clone 'https://github.com/yuvalgrofman/Ass_Three.git'
+        git clone 'https://github.com/yuvalgrofman/Ass-Three'
 
 Then, to run the server, based on the instructions in the server's part of this README.md file,
 followed by the clients, based on the instructions in the client's part of this README.md file.
